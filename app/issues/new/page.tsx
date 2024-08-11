@@ -1,6 +1,5 @@
 'use client'
 import { Button, Callout, TextField, Text } from '@radix-ui/themes'
-import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 // handling form submission
 import { useForm, Controller } from 'react-hook-form'
@@ -13,6 +12,12 @@ import { createIssueSchema } from '@/app/validationSchemas';
 import { z } from 'zod'
 import ErrorMessage from '@/app/components/ErrorMessage';
 import { Spinner } from '@radix-ui/themes';
+import dynamic from 'next/dynamic';
+
+// since markdown editor(client component) is rendered on server, markdown should be lazy loaded
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'),
+    { ssr: false }
+);
 
 // shape of the issue form
 // interface IssueForm {

@@ -10,7 +10,7 @@ const IssuesPage = async () => {
     //fetch all uses in the database
     const issues = await prisma.issue.findMany();
     return (
-        <div>
+        <div className='max-w-xl'>
             <IssueActions />
             <Table.Root variant='surface'>
                 <Table.Header>
@@ -24,7 +24,7 @@ const IssuesPage = async () => {
                     {issues.map(issue => (
                         <Table.Row key={issue.id}>
                             <Table.Cell>
-                                <Link href={`/issues/${issue.id}`}>
+                                <Link href={`/issues/${issue.id}`} className='hover:text-orange-800 hover:underline'>
                                     {issue.title}
                                 </Link>
                                 <div className='block md:hidden'><IssueStatusBadge status={issue.status} /></div>

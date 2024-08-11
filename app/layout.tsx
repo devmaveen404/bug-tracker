@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Theme accentColor="orange" scaling="105%">
+        <Theme accentColor="orange" scaling="100%">
           <NavBar />
           {/* contains page.tsx */}
           <main className='p-5'>{children}</main>
