@@ -1,6 +1,8 @@
+import IssueStatusBadge from '@/app/components/IssueStatusBadge';
 import prisma from '@/prisma/client'
+import { Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
-import React from 'react'
+import ReactMarkdown from 'react-markdown';
 
 interface Props {
     params: { id: string }
@@ -8,7 +10,7 @@ interface Props {
 
 const IssueDetailsPage = async ({ params }: Props) => {
     //redirect user to the not found page
-    if (typeof params.id != 'number') notFound();
+    // if (typeof params.id != 'number') notFound();
 
     //fetch an issue from prisma
     const issue = await prisma.issue.findUnique({
@@ -21,12 +23,16 @@ const IssueDetailsPage = async ({ params }: Props) => {
 
     return (
         <div>
-            <p>{issue.title}</p>
-            <p>{issue.description}</p>
-            <p>{issue.status}</p>
-            <p>{issue.createdAt.toDateString()}</p>
+            <Heading>{issue.title}</Heading>
+            <Flex gap='3' my='2'>
+                <IssueStatusBadge status={issue.status} />
+                <Text>{issue.createdAt.toDateString()}</Text>
+            </Flex>
+            <Card className='prose' mt='4'>
+                <ReactMarkdown>{issue.description}</ReactMarkdown>
+            </Card>
         </div>
     )
 };
 
-export default IssueDetailsPage;
+export default IssueDetailsPage; 
