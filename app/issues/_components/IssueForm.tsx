@@ -14,11 +14,12 @@ import ErrorMessage from '@/app/components/ErrorMessage';
 import { Spinner } from '@radix-ui/themes';
 import dynamic from 'next/dynamic';
 import { Issue } from '@prisma/client';
+import SimpleMDE from 'react-simplemde-editor';
 
 // since markdown editor(client component) is rendered on server, markdown should be lazy loaded
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'),
-    { ssr: false }
-);
+// const SimpleMDE = dynamic(() => import('react-simplemde-editor'),
+//     { ssr: false }
+// );
 
 // shape of the issue form
 // interface IssueForm {
@@ -64,6 +65,8 @@ const IssueForm = ({ issue }: Props) => {
                         else
                             await axios.post('/api/issues', data)
                         router.push('/issues')
+                        // to refresh the issues 
+                        router.refresh();
                     } catch (error) {
                         setIsSubmitting(false)
                         setError('Input details properly.')

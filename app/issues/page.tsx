@@ -39,4 +39,8 @@ const IssuesPage = async () => {
     )
 }
 
+// cache on the server
+// to render page dynamically at build time
+export const dynamic = 'force-dynamic';
+
 export default IssuesPage
