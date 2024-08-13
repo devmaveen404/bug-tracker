@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createIssueSchema } from '@/app/validationSchemas';
+import { IssueSchema } from '@/app/validationSchemas';
 import { z } from 'zod'
 import ErrorMessage from '@/app/components/ErrorMessage';
 import { Spinner } from '@radix-ui/themes';
@@ -26,7 +26,7 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'),
 //     description: string
 // }
 // shape of issue form based on schema
-type IssueFormData = z.infer<typeof createIssueSchema>
+type IssueFormData = z.infer<typeof IssueSchema>
 
 interface Props {
     issue?: Issue
@@ -38,7 +38,7 @@ const IssueForm = ({ issue }: Props) => {
     const router = useRouter()
     const { register, control, handleSubmit, formState: { errors } } = useForm<IssueFormData>({
         //zod integration with hookform
-        resolver: zodResolver(createIssueSchema)
+        resolver: zodResolver(IssueSchema)
     });
     //Handle Error when empty fiel is sumbitted
     const [error, setError] = useState('')
