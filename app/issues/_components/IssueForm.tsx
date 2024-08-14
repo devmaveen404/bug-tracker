@@ -64,7 +64,7 @@ const IssueForm = ({ issue }: Props) => {
                             axios.patch('/api/issues' + issue.id, data)
                         else
                             await axios.post('/api/issues', data)
-                        router.push('/issues')
+                        router.push('/issues/issueList')
                         // to refresh the issues 
                         router.refresh();
                     } catch (error) {

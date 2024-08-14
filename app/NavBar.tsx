@@ -15,7 +15,7 @@ const NavBar = () => {
 
     const links = [
         { label: 'Dashboard', href: '/' },
-        { label: 'Issues', href: '/issues' }
+        { label: 'Issues', href: '/issues/issueFiles' }
     ]
 
     return (
