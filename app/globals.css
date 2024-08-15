@@ -18,3 +18,10 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+/* create custom tailwind classes */
+@layer utilities {
+  .nav-links {
+    @apply hover:text-zinc-800 transition-colors
+  }
+}

@@ -2,21 +2,24 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
 //prisma adapter, to store user authentication info in the database
+import type { NextAuthOptions } from 'next-auth'
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "@/prisma/client";
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = ({
     adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
-        })
+        }),
     ],
     // since database strategy does not work with prisma adapter
     session: {
-        strategy: "jwt"
-    }
-})
+        strategy: "jwt",
+    },
+});
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
