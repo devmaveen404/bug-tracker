@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
 import { GoIssueTracks } from "react-icons/go";
+import { Skeleton } from '@/app/components';
 
 
 
@@ -52,6 +53,7 @@ const AuthStatus = () => {
     //access auth session, i.e signin signout
     const { status, data: session } = useSession();
 
+    if (status === 'loading') return <Skeleton width={'3rem'} />;
     return (
         <Box>
             {status === 'authenticated' && (
