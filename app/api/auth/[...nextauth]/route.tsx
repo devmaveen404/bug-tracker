@@ -13,7 +13,7 @@ const handler = NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
         })
     ],
-    // since databas e strategy does not work with prisma adapter
+    // since database strategy does not work with prisma adapter
     session: {
         strategy: "jwt"
     }

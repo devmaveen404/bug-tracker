@@ -1,4 +1,5 @@
 //a session provider to access user current session, i.e. signin, signout
+'use client'
 import React, { PropsWithChildren } from 'react'
 import { SessionProvider } from 'next-auth/react'
 
