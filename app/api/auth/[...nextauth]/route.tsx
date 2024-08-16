@@ -6,7 +6,7 @@ import type { NextAuthOptions } from 'next-auth'
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "@/prisma/client";
 
-export const authOptions: NextAuthOptions = ({
+export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = ({
     session: {
         strategy: "jwt",
     },
-});
+};
 
 const handler = NextAuth(authOptions)
 
