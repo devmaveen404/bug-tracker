@@ -1,10 +1,12 @@
-import prisma from "@/prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { IssueSchema } from '@/app/validationSchemas'
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 
 // data validation
+
+const prisma = new PrismaClient()
 
 // api for creating data
 export async function POST(request: NextRequest) {

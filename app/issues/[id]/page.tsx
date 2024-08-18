@@ -1,5 +1,5 @@
 // issue details page
-import prisma from '@/prisma/client'
+import { PrismaClient } from '@prisma/client';
 import { Box, Flex, Grid } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
 import EditIssueButton from './EditIssueButton';
@@ -12,6 +12,8 @@ import AssigneeSelect from './AssigneeSelect';
 interface Props {
     params: { id: string }
 }
+
+const prisma = new PrismaClient()
 
 const IssueDetailsPage = async ({ params }: Props) => {
     //get current user session, from auth/route.tsx 

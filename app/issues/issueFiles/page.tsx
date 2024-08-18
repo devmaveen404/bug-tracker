@@ -1,10 +1,11 @@
 import React from 'react'
 import { Table } from '@radix-ui/themes'
-import prisma from '@/prisma/client'
+import { PrismaClient } from '@prisma/client'
 import { IssueStatusBadge } from '@/app/components'
 import IssueActions from './IssueActionButtons'
 import Link from 'next/link'
 
+const prisma = new PrismaClient()
 
 const IssuesPage = async () => {
     //fetch all uses in the database

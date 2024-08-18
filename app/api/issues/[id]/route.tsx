@@ -1,10 +1,12 @@
 // update issue
 
 import { IssueSchema } from "@/app/validationSchemas";
-import prisma from "@/prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
+
+const prisma = new PrismaClient()
 
 //update issue
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
