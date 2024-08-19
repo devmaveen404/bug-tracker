@@ -1,7 +1,14 @@
+import { getServerSession } from 'next-auth'
 import Image from 'next/image'
+import { authOptions } from './api/auth/[...nextauth]/route'
+import { Em, Heading } from '@radix-ui/themes';
 
-export default function Home() {
+export default async function Home() {
+
+  //access session on server
+  const session = await getServerSession(authOptions);
+
   return (
-    <div>Hello World</div>
+    <Heading>Welcome{session && <Em>{`, ${session.user!.name}`}</Em>}</Heading>
   )
 }

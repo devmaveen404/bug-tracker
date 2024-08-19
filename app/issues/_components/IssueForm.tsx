@@ -41,7 +41,7 @@ const IssueForm = ({ issue }: Props) => {
         //zod integration with hookform
         resolver: zodResolver(IssueSchema)
     });
-    //Handle Error when empty fiel is sumbitted
+    //Handle Error when empty field is sumbitted
     const [error, setError] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false);
 

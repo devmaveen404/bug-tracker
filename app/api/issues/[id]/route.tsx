@@ -12,6 +12,7 @@ const prisma = new PrismaClient()
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
     //protecting the api endpoint
     const session = await getServerSession(authOptions);
+
     if (!session)
         return NextResponse.json({}, { status: 401 })
     // sending request to the api endpoint

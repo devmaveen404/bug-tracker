@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(validation.error.errors, { status: 400 });
 
     const user = await prisma.user.findUnique({
-        where: { username: body.username, email: body.email },
+        where: { name: body.name, email: body.email },
     })
 
     if (user)
@@ -31,11 +31,11 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await bycrpt.hash(body.password, 10)
     const newUser = await prisma.user.create({
         data: {
-            username: body.username,
+            name: body.name,
             email: body.email,
             hashedPassword
         }
     });
 
-    return NextResponse.json({ username: newUser.username, email: newUser.email });
+    return NextResponse.json({ name: newUser.name, email: newUser.email });
 }

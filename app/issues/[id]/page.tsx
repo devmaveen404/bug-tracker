@@ -27,7 +27,7 @@ const IssueDetailsPage = async ({ params }: Props) => {
         where: { id: parseInt(params.id) }
     });
 
-    // if issue doesn't exist redirect user to the no found page
+    // if issue doesn't exist redirect user to the not found page
     if (!issue)
         notFound();
 
