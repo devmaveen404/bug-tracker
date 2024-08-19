@@ -13,7 +13,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         queryKey: ['users'],
         queryFn: () => axios.get('/api/users').then(res => res.data),
         // set duration for which fetched data should be cached for, after the duration, the user(data) is refetched
-        staleTime: 60 * 1000, //60s
+        staleTime: 200 * 1000, //3m
         retry: 3
     });
 
@@ -21,16 +21,19 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 
     if (error) return null;
 
+    // implementation for assigning issue to user
+    const assignIssue = async (userId: string) => {
+        await axios.patch('/api/issues/' + issue.id, { assignedToUserId: userId === 'unassigned' ? null : userId })
+            .catch(() => {
+                toast.error('Changes could not be saved')
+            })
+    }
+
     return (
         <>
             <Select.Root
                 defaultValue={issue.assignedToUserId || ''}
-                onValueChange={async (userId) => {
-                    await axios.patch('/api/issues/' + issue.id, { assignedToUserId: userId === 'unassigned' ? null : userId })
-                        .catch(() => {
-                            toast.error('Changes could not be saved')
-                        })
-                }}>
+                onValueChange={assignIssue}>
                 <Select.Trigger placeholder='Assign..' />
                 <Select.Content>
                     <Select.Group>
