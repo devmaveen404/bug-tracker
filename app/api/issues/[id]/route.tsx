@@ -44,7 +44,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
             description: body.description,
             assignedToUserId: body.assignedToUserId
         }
-    }) 
+    })
 
     // return updated issue to the client
     return NextResponse.json(updatedIssue, { status: 201 })
