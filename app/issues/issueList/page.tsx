@@ -1,15 +1,27 @@
 import React from 'react'
 import { Table } from '@radix-ui/themes'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Status } from '@prisma/client'
 import { IssueStatusBadge } from '@/app/components'
 import IssueActions from './IssueActionButtons'
 import Link from 'next/link'
 
 const prisma = new PrismaClient()
 
-const IssuesPage = async () => {
+const IssuesPage = async ({ searchParams }: { searchParams: { status: Status } }) => {
+
+    // validate issues, issues status, before rendering
+    //returns status properties
+    const statuses = Object.values(Status)
+    // a)
+    const status = statuses.includes(searchParams.status) ? searchParams.status : undefined;
+
     //fetch all uses in the database
-    const issues = await prisma.issue.findMany();
+    const issues = await prisma.issue.findMany({
+        where: {
+            // b)
+            status
+        }
+    });
     return (
         <div className='max-w-xl'>
             <IssueActions />
