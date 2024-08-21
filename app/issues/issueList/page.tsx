@@ -5,6 +5,7 @@ import { IssueStatusBadge } from '@/app/components'
 import IssueActions from './IssueActionButtons'
 import Link from 'next/link'
 import { IoArrowUp, IoArrowDown } from 'react-icons/io5'
+import Pagination from '@/app/components/pagination'
 
 
 const prisma = new PrismaClient()
@@ -14,6 +15,7 @@ interface Props {
         status: Status,
         orderBy: keyof Issue
         sort: 'asc' | 'desc'
+        page: string
     };
 }
 
@@ -35,12 +37,16 @@ const IssuesPage = async ({ searchParams }: Props) => {
     // a) filter issues by status
     const status = statuses.includes(searchParams.status) ? searchParams.status : undefined;
 
-    //sort issues in asc
+    //sort issues in asc or desc
     const orderBy = columns.map(columns => columns.value).includes(searchParams.orderBy) ? { [searchParams.orderBy]: searchParams.sort } : undefined;
 
     const toggleOrder = () => {
         return !searchParams.sort || searchParams.sort === "desc" ? "asc" : "desc";
     };
+
+    // Pagination
+    const page = parseInt(searchParams.page) || 1;
+    const pageSize = 10
 
     //fetch all issues in the database
     const issues = await prisma.issue.findMany({
@@ -48,8 +54,16 @@ const IssuesPage = async ({ searchParams }: Props) => {
             // b)
             status
         },
-        orderBy
+        orderBy,
+        skip: (page - 1) * pageSize,
+        take: pageSize
     });
+
+    // get total number of issues
+    const issueCount = await prisma.issue.count({
+        where: { status }
+    })
+
     return (
         <div className='max-w-xl'>
             <IssueActions />
@@ -86,6 +100,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
                     ))}
                 </Table.Body>
             </Table.Root>
+            <Pagination itemCount={issueCount} currentPage={page} pageSize={pageSize} />
         </div>
     )
 }
