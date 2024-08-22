@@ -1,10 +1,10 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/route'
-import { Em, Heading } from '@radix-ui/themes';
-import Pagination from './components/pagination';
+import { Em, Flex, Grid, Heading } from '@radix-ui/themes';
 import LatestIssues from './LatestIssues';
 import IssueSummary from './IssueSummary';
 import { PrismaClient } from '@prisma/client';
+import IssueBarChart from './IssueBarChart';
 
 
 const prisma = new PrismaClient()
@@ -23,7 +23,14 @@ export default async function Home() {
     <>
       <Heading mb={'8'}>Welcome{session && <Em>{`, ${session.user!.name}`}</Em>}</Heading>
       {/* <LatestIssues /> */}
-      <IssueSummary open={open} inProgress={inProgress} closed={closed} />
+      {/* <IssuePieChart open={open} inProgress={inProgress} closed={closed}/> */}
+      <Grid columns={{ initial: '1', md: '2' }} gap={'5'}>
+        <Flex direction='column' gap={'5'}>
+          <IssueSummary open={open} inProgress={inProgress} closed={closed} />
+          <IssueBarChart open={open} inProgress={inProgress} closed={closed} />
+        </Flex>
+        <LatestIssues />
+      </Grid>
     </>
   )
 }

@@ -13,11 +13,11 @@ import { Skeleton } from '@/app/components';
 const NavBar = () => {
 
     return (
-        <nav className='border-b mb-5 px-5 py-3'>
+        <nav className='border-b mb-5 px-5 py-3 bg-black m-3 rounded-md'>
             <Container>
                 <Flex justify={'between'}>
                     <Flex align={'center'} gap={'3'}>
-                        <Link href="/"><GoIssueTracks color='orange' /></Link>
+                        <Link href="/"><GoIssueTracks style={{ fill: 'var(--accent-9)' }} /></Link>
                         <NavLinks />
                     </Flex>
                     <AuthStatus />
@@ -42,7 +42,7 @@ const NavLinks = () => {
     return (
         <ul className='flex space-x-6'>
             {links.map(link => <li key={link.href}>
-                <Link className={`${link.href == currentPath ? "!text-zinc-900" : "text-zinc-500"} nav-links`} href={link.href}>{link.label}</Link></li>)}
+                <Link className={`${link.href == currentPath ? "!text-zinc-50" : "text-zinc-50"} nav-links`} href={link.href}>{link.label}</Link></li>)}
         </ul>
     )
 }

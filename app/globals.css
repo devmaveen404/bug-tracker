@@ -22,6 +22,6 @@ body {
 /* create custom tailwind classes */
 @layer utilities {
   .nav-links {
-    @apply hover:text-zinc-800 transition-colors
+    @apply hover:text-[var(--accent-8)] transition-colors
   }
 }

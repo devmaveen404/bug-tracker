@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={inter.variable}>
         <QueryClientProvider>
           <AuthProvider>
-            <Theme accentColor="orange" scaling="100%">
+            <Theme accentColor="grass" scaling="100%">
               <NavBar />
               {/* contains page.tsx */}
               <main className='p-5'>
