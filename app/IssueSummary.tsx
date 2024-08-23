@@ -24,11 +24,11 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
     return (
         <Flex gap={'4'}>
             {statuses.map(status => (
-                <Card key={status.label}>
-                    <Flex direction={'column'} gap={'1'}>
+                <Card key={status.label} >
+                    <Flex direction={'column'} gap={'1'} className='blurtext backdrop-blur-lg bg-white/30'>
                         <Link
                             className='text-sm font-medium'
-                            href={`/issues/issue?status=${status.status}`}
+                            href={`/issues/issueList?status=${status.status}`}
                         >
                             {status.label}
                         </Link>

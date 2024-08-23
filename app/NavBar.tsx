@@ -53,7 +53,7 @@ const AuthStatus = () => {
     //access auth session, i.e signin signout
     const { status, data: session } = useSession();
 
-    if (status === 'loading') return <Skeleton width={'3rem'} />;
+    if (status === 'loading') return <Skeleton width={'2rem'} height={'2rem'} borderRadius={'100%'} />;
     return (
         <Box>
             {status === 'authenticated' && (

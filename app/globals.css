@@ -4,19 +4,20 @@
 
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: transparent;
+  --background-start-rgb: transparent;
+  --background-end-rgb: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 0, 0, 0;
+    --foreground-rgb: transparent;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--accent-9));
+  background: blur;
 }
 
 /* create custom tailwind classes */

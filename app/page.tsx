@@ -22,7 +22,6 @@ export default async function Home() {
   return (
     <>
       <Heading mb={'8'}>Welcome{session && <Em>{`, ${session.user!.name}`}</Em>}</Heading>
-      {/* <LatestIssues /> */}
       {/* <IssuePieChart open={open} inProgress={inProgress} closed={closed}/> */}
       <Grid columns={{ initial: '1', md: '2' }} gap={'5'}>
         <Flex direction='column' gap={'5'}>

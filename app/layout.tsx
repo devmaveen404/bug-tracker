@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import NavBar from './NavBar'
 import '@radix-ui/themes/styles.css';
 import './theme-config.css'
-import { Container, Theme, ThemePanel } from '@radix-ui/themes'
+import { Container, Theme, } from '@radix-ui/themes'
 import AuthProvider from './auth/Provider';
 import QueryClientProvider from './QueryClientProvider';
 
@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={inter.variable}>
         <QueryClientProvider>
           <AuthProvider>
-            <Theme accentColor="grass" scaling="100%">
+            <Theme accentColor="grass" scaling="100%" hasBackground={false}>
               <NavBar />
               {/* contains page.tsx */}
               <main className='p-5'>
