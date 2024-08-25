@@ -1,7 +1,7 @@
 import React from 'react'
 import { PrismaClient, Status } from '@prisma/client'
 import IssueActions from './IssueActionButtons'
-import Pagination from '@/app/components/pagination'
+import Pagination from '@/app/components/Pagination'
 import IssueTable, { columnNames, IssueQuery } from './IssueTable'
 import { Flex } from '@radix-ui/themes'
 

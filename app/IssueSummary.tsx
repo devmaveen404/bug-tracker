@@ -2,6 +2,7 @@ import { Status } from '@prisma/client';
 import { Card, Flex, Text } from '@radix-ui/themes'
 import Link from 'next/link';
 import React from 'react'
+import { MdDiversity3 } from 'react-icons/md';
 
 interface Props {
     open: number;
@@ -24,14 +25,14 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
     return (
         <Flex gap={'4'}>
             {statuses.map(status => (
-                <Card key={status.label} >
-                    <Flex direction={'column'} gap={'1'} className='blurtext backdrop-blur-lg bg-white/30'>
-                        <Link
+                <Card key={status.label} className='backdrop-filter backdrop-blur-lg bg-opacity-50'>
+                    <Flex direction={'column'} gap={'1'}>
+                        <div
                             className='text-sm font-medium'
-                            href={`/issues/issueList?status=${status.status}`}
+                        // href={`/issues/issue?status=${status.status}`}
                         >
                             {status.label}
-                        </Link>
+                        </div>
                         <Text size={'5'} className='font-bold'>{status.value}</Text>
                     </Flex>
                 </Card>

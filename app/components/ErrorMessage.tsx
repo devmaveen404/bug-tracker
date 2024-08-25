@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react'
 
 const ErrorMessage = ({ children }: PropsWithChildren) => {
     return (
-        <Text color='red' as='p'>{children}</Text>
+        <Text mt={'2'} color='red' as='p'>{children}</Text>
     )
 }
 
