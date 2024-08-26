@@ -1,22 +1,19 @@
 // registering users in application
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
 import bycrpt from 'bcrypt'
+
+// to validate post request sent to the backend
+import { signUpFormSchema } from '@/app/validationSchemas';
 
 const prisma = new PrismaClient()
 
-// validation
-const schema = z.object({
-    name: z.string().min(5),
-    email: z.string().email(),
-    password: z.string().min(5)
-});
 
-//create api endpoint for creating new user
+
+//create api endpoint for creating(register) new user
 export async function POST(request: NextRequest) {
     const body = await request.json();
-    const validation = schema.safeParse(body);
+    const validation = signUpFormSchema.safeParse(body);
     if (!validation.success)
         return NextResponse.json(validation.error.errors, { status: 400 });
 

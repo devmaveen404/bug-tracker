@@ -48,7 +48,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   })
 
   return (
-    <Flex direction={'column'} gap={'4'} className='max-w-2xl'>
+    <Flex direction={'column'} gap={'4'} className='max-w-xl'>
       <IssueActions />
       <IssueTable searchParams={searchParams} issues={issues} />
       <Pagination itemCount={issueCount} currentPage={page} pageSize={pageSize} />

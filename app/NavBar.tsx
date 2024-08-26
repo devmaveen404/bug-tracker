@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react'
 import { GoIssueTracks } from "react-icons/go";
 import { Skeleton } from '@/app/components';
+import { RxAvatar } from "react-icons/rx";
 
 
 
@@ -54,13 +55,15 @@ const AuthStatus = () => {
     const { status, data: session } = useSession();
 
     if (status === 'loading') return <Skeleton width={'2rem'} height={'2rem'} borderRadius={'100%'} />;
+
+
     return (
         <Box>
-            {status === 'authenticated' && (
+            {session && (
                 <DropdownMenu.Root>
                     <DropdownMenu.Trigger>
                         <Avatar
-                            src={session.user!.image!}
+                            src={session.user!.image || "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"}
                             fallback='#'
                             size={'2'}
                             radius='full' />
@@ -75,7 +78,7 @@ const AuthStatus = () => {
                     </DropdownMenu.Content>
                 </DropdownMenu.Root>
             )}
-            {status === 'unauthenticated' && <Link href={'/api/auth/signin'}>Log in</Link>}
+            {!session && <Link className='text-white' href={'/api/auth/signin'}>Log in</Link>}
         </Box>
     )
 }

@@ -3,7 +3,7 @@ import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 //prisma adapter, to store user authentication info in the database
-import type { NextAuthOptions } from 'next-auth'
+import { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
@@ -25,10 +25,10 @@ export const authOptions: NextAuthOptions = {
             },
             //validate authorization
             async authorize(credentials, req) {
-                if (!credentials?.name || !credentials?.email || !credentials.password) return null;
+                if (!credentials?.email || !credentials.password) return null;
 
                 const user = await prisma.user.findUnique({
-                    where: { name: credentials.name, email: credentials.email }
+                    where: { email: credentials.email }
                 })
 
                 if (!user) return null;
@@ -43,6 +43,14 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
         }),
     ],
+    callbacks: {
+        async jwt({ token }) {
+            return token
+        },
+        async session({ session, token }) {
+            return session
+        }
+    },
     theme: {
         colorScheme: "light",
     },
