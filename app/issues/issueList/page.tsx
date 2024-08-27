@@ -3,7 +3,9 @@ import { PrismaClient, Status } from '@prisma/client'
 import IssueActions from './IssueActionButtons'
 import Pagination from '@/app/components/Pagination'
 import IssueTable, { columnNames, IssueQuery } from './IssueTable'
-import { Flex } from '@radix-ui/themes'
+import { Box, Flex, Grid } from '@radix-ui/themes'
+import issueListImage from '../../assets/completed.png'
+import Image from 'next/image'
 
 const prisma = new PrismaClient()
 
@@ -48,11 +50,20 @@ const IssuesPage = async ({ searchParams }: Props) => {
   })
 
   return (
-    <Flex direction={'column'} gap={'4'} className='max-w-xl'>
-      <IssueActions />
-      <IssueTable searchParams={searchParams} issues={issues} />
-      <Pagination itemCount={issueCount} currentPage={page} pageSize={pageSize} />
-    </Flex>
+    <Grid columns={{ initial: '1', md: '2' }} className='p-7'>
+      <Flex direction={'column'} gap={'4'} className='max-w-2xl'>
+        <IssueActions />
+        <IssueTable searchParams={searchParams} issues={issues} />
+        <Pagination itemCount={issueCount} currentPage={page} pageSize={pageSize} />
+      </Flex>
+      <Flex className='lg:hidden object-contain justify-center items-center ml-12'>
+        <Image
+          src={issueListImage}
+          width={500}
+          height={500}
+          alt='add new issue page' />
+      </Flex>
+    </Grid>
   )
 }
 

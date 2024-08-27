@@ -4,10 +4,10 @@ import { Skeleton } from '@/app/components';
 
 const IssueFormSkeleton = () => {
     return (
-        <Box className='max-w-xl'>
-            <Skeleton height='3rem' />
-            <Skeleton height="20rem" />
-        </Box>
+        <Box className='max-w-xl p-7'>
+            < Skeleton height = '3rem' />
+                <Skeleton height="20rem" />
+        </Box >
     )
 }
 

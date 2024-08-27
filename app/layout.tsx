@@ -34,7 +34,7 @@ export default function RootLayout({
             <Theme accentColor="crimson" scaling="100%" hasBackground={false}>
               <Pathname />
               {/* contains page.tsx */}
-              <main className='p-5'>
+              <main>
                 <Container>
                   {children}
                 </Container>

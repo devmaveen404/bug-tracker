@@ -46,7 +46,7 @@ const IssueForm = ({ issue }: Props) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     return (
-        <div className='max-w-xl'>
+        <div className='max-w-xl p-7'>
             {error && <Callout.Root color='red' className='mb-5' >
                 <Callout.Icon>
                     <IoInformationCircleOutline />

@@ -9,7 +9,7 @@ const loadingIssuePage = () => {
     const issues = [1, 2, 3, 4, 5]
 
     return (
-        <Flex direction={'column'} gap={'4'} className='max-w-2xl'>
+        <Flex direction={'column'} gap={'4'} className='max-w-2xl p-7'>
             <IssueActions />
             <Table.Root variant='surface'>
                 <Table.Header>

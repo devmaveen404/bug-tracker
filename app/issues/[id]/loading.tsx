@@ -4,8 +4,8 @@ import { Skeleton } from '@/app/components'
 
 const loadingIssueDetailsPage = () => {
     return (
-        <Box className='max-w-xl'>
-            <Skeleton />
+        <Box className='max-w-xl p-7'>
+            < Skeleton />
             <Flex gap='3' my='2'>
                 {/* bagde */}
                 <Skeleton width='5rem' />
@@ -15,7 +15,7 @@ const loadingIssueDetailsPage = () => {
             <Card className='prose' mt='4'>
                 <Skeleton count={3} />
             </Card>
-        </Box>
+        </Box >
     )
 }
 

@@ -7,8 +7,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react'
 import { GoIssueTracks } from "react-icons/go";
 import { Skeleton } from '@/app/components';
-import { RxAvatar } from "react-icons/rx";
-
+import SearchBar from './components/SearchBar';
 
 
 const NavBar = () => {
@@ -21,6 +20,7 @@ const NavBar = () => {
                         <Link href="/"><GoIssueTracks style={{ fill: 'var(--accent-9)' }} /></Link>
                         <NavLinks />
                     </Flex>
+                    <SearchBar />
                     <AuthStatus />
                 </Flex>
             </Container>
@@ -54,7 +54,7 @@ const AuthStatus = () => {
     //access auth session, i.e signin signout
     const { status, data: session } = useSession();
 
-    if (status === 'loading') return <Skeleton width={'2rem'} height={'2rem'} borderRadius={'100%'} />;
+    if (status === 'loading') return <Skeleton width={'2rem'} height={'1rem'} />;
 
 
     return (

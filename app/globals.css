@@ -16,13 +16,13 @@
 }
 
 body {
-  color: rgb(var(--accent-9));
+  color: rgb(var(--accent-11));
   background: blur;
 }
 
 /* create custom tailwind classes */
 @layer utilities {
   .nav-links {
-    @apply hover:text-[var(--accent-8)] transition-colors
+    @apply hover:text-[var(--accent-11)] transition-colors
   }
 }

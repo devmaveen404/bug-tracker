@@ -18,12 +18,14 @@ const newIssuePage = () => {
   return (
     <Grid columns={{ initial: '1', md: '2' }}>
       <IssueForm />
-      <Image className='justify-left items-right align-middle'
-        src={newIssueImage}
-        width={500}
-        height={500}
-        alt='add new issue page'
-      />
+      <div className='justify-left items-right align-middle object-contain'>
+        <Image
+          src={newIssueImage}
+          width={500}
+          height={500}
+          alt='add new issue page'
+        />
+      </div>
     </Grid>
 
   )

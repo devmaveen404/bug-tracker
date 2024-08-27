@@ -12,6 +12,8 @@ import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios';
 import { signIn } from 'next-auth/react';
+import Image from 'next/image';
+import authImage from '../assets/issue tracker.png'
 
 
 type signUpFormData = z.infer<typeof signUpFormSchema>
@@ -59,9 +61,13 @@ const AuthForm = () => {
 
     return (
         <>
-            < Grid columns={{ initial: '1', md: '2' }}>
-                <div className='hidden lg:inline-grid'>
-                    <div> ghddhdshbsdnsdff</div>
+            < Grid columns={{ initial: '1', md: '2' }} gap={'10'}>
+                <div className='hidden lg:grid lg:grid-cols-[2rem, 8fr]'>
+                    <Image
+                        src={authImage}
+                        width={500}
+                        height={500}
+                        alt='add new issue page' />
                 </div>
                 <div className='flex justify-center items-center content-center'>
                     <Tabs.Root
@@ -70,10 +76,10 @@ const AuthForm = () => {
                     >
                         <GoogleSignInButton>SignIn with Google</GoogleSignInButton>
 
-                        <div className='relative flex mb-4 items-center'>
-                            <div className='flex-grow border-t border-gray-400'></div>
-                            <span className='flex-shrink mx-2 italic text-sm text-gray-400'>or</span>
-                            <div className='flex-grow border-t border-gray-400'></div>
+                        <div className='relative flex  px-10 mb-4 items-center'>
+                            <div className='flex-grow border-t border-gray-300'></div>
+                            <span className='flex-shrink mx-2 italic text-sm text-gray-300'>or</span>
+                            <div className='flex-grow border-t border-gray-300'></div>
                         </div>
 
                         <Tabs.List className="flex transition-all duration-200" aria-label="Manage your account">
