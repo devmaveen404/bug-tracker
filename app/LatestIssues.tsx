@@ -1,10 +1,9 @@
 import React from 'react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/prisma/prismaClient'
 import { Avatar, Card, Flex, Heading, Table } from '@radix-ui/themes'
 import Link from 'next/link'
 import { IssueStatusBadge } from './components'
 
-const prisma = new PrismaClient()
 // render issues in descending order
 const LatestIssues = async () => {
 	const issues = await prisma.issue.findMany({

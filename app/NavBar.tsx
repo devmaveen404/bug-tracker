@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
-import { GoIssueTracks } from "react-icons/go";
 import { Skeleton } from '@/app/components';
 import SearchBar from './components/SearchBar';
 
@@ -13,18 +12,18 @@ import SearchBar from './components/SearchBar';
 const NavBar = () => {
 
     return (
-        <nav className='sticky top-0 z-10 border-b mb-5 px-5 py-3 bg-black m-3 rounded-md'>
-            <Container>
-                <Flex justify={'between'}>
-                    <Flex align={'center'} gap={'3'}>
-                        <Link href="/"><GoIssueTracks style={{ fill: 'var(--accent-9)' }} /></Link>
+        <Container maxWidth={'1440px'}>
+            <div className='font-serif font-bold bg-[var-(accent--9)] flex justify-center items-center p-1'>MAVEN</div>
+            <nav className='sticky top-0 z-10 bg-black p-3'>
+                <Flex>
+                    <Flex align={'center'}>
                         <NavLinks />
                     </Flex>
-                    <SearchBar />
+                    {/* <SearchBar /> */}
                     <AuthStatus />
                 </Flex>
-            </Container>
-        </nav>
+            </nav >
+        </Container>
     )
 };
 
@@ -41,9 +40,9 @@ const NavLinks = () => {
     ]
 
     return (
-        <ul className='flex space-x-6'>
+        <ul className='flex flex-row rounded-md space-x-3'>
             {links.map(link => <li key={link.href}>
-                <Link className={`${link.href == currentPath ? "!text-zinc-50" : "text-zinc-50"} nav-links`} href={link.href}>{link.label}</Link></li>)}
+                <Link className={`${link.href == currentPath ? "!bg-[var(--accent-11)] text-white" : "text-white"} nav-links`} href={link.href}>{link.label}</Link></li>)}
         </ul>
     )
 }

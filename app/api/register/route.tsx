@@ -1,12 +1,10 @@
 // registering users in application
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/prisma/prismaClient';
 import { NextRequest, NextResponse } from 'next/server';
 import bycrpt from 'bcrypt'
 
 // to validate post request sent to the backend
 import { signUpFormSchema } from '@/app/validationSchemas';
-
-const prisma = new PrismaClient()
 
 
 

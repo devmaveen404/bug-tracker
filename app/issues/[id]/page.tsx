@@ -1,5 +1,5 @@
 // issue details page
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/prisma/prismaClient';
 import { Box, Flex, Grid } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
 import EditIssueButton from './EditIssueButton';
@@ -13,7 +13,6 @@ interface Props {
     params: { id: string }
 }
 
-const prisma = new PrismaClient()
 
 const IssueDetailsPage = async ({ params }: Props) => {
     //get current user session, from auth/route.tsx 
@@ -32,7 +31,7 @@ const IssueDetailsPage = async ({ params }: Props) => {
         notFound();
 
     return (
-        //apply 
+        //apply
         <Grid columns={{ initial: '1', sm: '5' }} gap='5' className='p-7'>
             <Box className='md:col-span-4'>
                 <IssueDetails issue={issue} />

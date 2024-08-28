@@ -1,13 +1,13 @@
 import React from 'react'
-import { PrismaClient, Status } from '@prisma/client'
+import { Status } from '@prisma/client'
+import { prisma } from '@/prisma/prismaClient'
 import IssueActions from './IssueActionButtons'
 import Pagination from '@/app/components/Pagination'
 import IssueTable, { columnNames, IssueQuery } from './IssueTable'
-import { Box, Flex, Grid } from '@radix-ui/themes'
+import { Flex, Grid } from '@radix-ui/themes'
 import issueListImage from '../../assets/completed.png'
 import Image from 'next/image'
 
-const prisma = new PrismaClient()
 
 interface Props {
   searchParams: IssueQuery

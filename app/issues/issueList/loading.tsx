@@ -1,4 +1,4 @@
-import { Flex, Table } from '@radix-ui/themes'
+import { Container, Flex, Table } from '@radix-ui/themes'
 import React from 'react'
 import IssueActions from './IssueActionButtons'
 import { Skeleton } from '@/app/components'

@@ -1,10 +1,9 @@
 import React from 'react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/prisma/prismaClient'
 import { notFound } from 'next/navigation'
 import IssueFormSkeleton from './loading'
 import dynamic from 'next/dynamic'
 
-const prisma = new PrismaClient()
 
 const IssueForm = dynamic(() => import('../../_components/IssueForm'),
     {

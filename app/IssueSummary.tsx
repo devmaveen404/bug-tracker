@@ -1,8 +1,6 @@
 import { Status } from '@prisma/client';
 import { Card, Flex, Text } from '@radix-ui/themes'
-import Link from 'next/link';
 import React from 'react'
-import { MdDiversity3 } from 'react-icons/md';
 
 interface Props {
     open: number;

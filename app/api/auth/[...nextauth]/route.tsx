@@ -5,10 +5,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 //prisma adapter, to store user authentication info in the database
 import { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/prisma/prismaClient";
 import bcrypt from 'bcrypt';
 
-const prisma = new PrismaClient()
 
 export const authOptions: NextAuthOptions = {
     pages: {

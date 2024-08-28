@@ -35,7 +35,7 @@ export default function RootLayout({
               <Pathname />
               {/* contains page.tsx */}
               <main>
-                <Container>
+                <Container maxWidth={'1440px'}>
                   {children}
                 </Container>
               </main>

@@ -3,11 +3,9 @@ import { authOptions } from './api/auth/[...nextauth]/route'
 import { Em, Flex, Grid, Heading } from '@radix-ui/themes';
 import LatestIssues from './LatestIssues';
 import IssueSummary from './IssueSummary';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/prisma/prismaClient';
 import IssueBarChart from './IssueBarChart';
 
-
-const prisma = new PrismaClient()
 
 export default async function Home() {
 

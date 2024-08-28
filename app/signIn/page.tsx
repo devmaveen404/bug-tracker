@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
-import { Box, Grid } from '@radix-ui/themes';
+import { Grid } from '@radix-ui/themes';
 import { signInFormSchema, signUpFormSchema } from '../validationSchemas';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -61,17 +61,17 @@ const AuthForm = () => {
 
     return (
         <>
-            < Grid columns={{ initial: '1', md: '2' }} gap={'10'}>
-                <div className='hidden lg:grid lg:grid-cols-[2rem, 8fr]'>
+            <Grid columns={{ initial: '1', md: '2' }} justify={'between'} >
+                <div className='hidden lg:flex'>
                     <Image
                         src={authImage}
                         width={500}
                         height={500}
                         alt='add new issue page' />
                 </div>
-                <div className='flex justify-center items-center content-center'>
+                <div className='flex justify-center items-center content-center h-screen mt-2'>
                     <Tabs.Root
-                        className="flex flex-col w-[50%] lg:w-[70%] shadow-md rounded-lg p-4"
+                        className="flex flex-col w-[50%] lg:w-[70%] rounded-lg p-4"
                         defaultValue="tab1"
                     >
                         <GoogleSignInButton>SignIn with Google</GoogleSignInButton>

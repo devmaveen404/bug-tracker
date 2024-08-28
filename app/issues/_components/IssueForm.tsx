@@ -1,5 +1,5 @@
 'use client'
-import { Button, Callout, TextField, Text } from '@radix-ui/themes'
+import { Button, Callout, TextField } from '@radix-ui/themes'
 import "easymde/dist/easymde.min.css";
 // handling form submission
 import { useForm, Controller } from 'react-hook-form'
@@ -12,7 +12,6 @@ import { IssueSchema } from '@/app/validationSchemas';
 import { z } from 'zod'
 import ErrorMessage from '@/app/components/ErrorMessage';
 import { Spinner } from '@radix-ui/themes';
-import dynamic from 'next/dynamic';
 import { Issue } from '@prisma/client';
 import SimpleMDE from 'react-simplemde-editor';
 
@@ -87,6 +86,7 @@ const IssueForm = ({ issue }: Props) => {
                 </Button>
             </form>
         </div>
+
     )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic';
 import IssueFormSkeleton from './loading';
-import { Grid } from '@radix-ui/themes';
+import { Container, Grid } from '@radix-ui/themes';
 import Image from 'next/image';
 import newIssueImage from '../../assets/join.png'
 
@@ -27,7 +27,6 @@ const newIssuePage = () => {
         />
       </div>
     </Grid>
-
   )
 }
 
