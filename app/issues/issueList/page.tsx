@@ -56,8 +56,9 @@ const IssuesPage = async ({ searchParams }: Props) => {
         <IssueTable searchParams={searchParams} issues={issues} />
         <Pagination itemCount={issueCount} currentPage={page} pageSize={pageSize} />
       </Flex>
-      <Flex className='lg:hidden object-contain justify-center items-center ml-12'>
+      <Flex className='object-contain justify-center items-center ml-12'>
         <Image
+          className='hidden lg:grid'
           src={issueListImage}
           width={500}
           height={500}

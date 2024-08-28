@@ -13,13 +13,14 @@ const NavBar = () => {
 
     return (
         <Container maxWidth={'1440px'}>
-            <div className='font-serif font-bold bg-[var-(accent--9)] flex justify-center items-center p-1'>MAVEN</div>
             <nav className='sticky top-0 z-10 bg-black p-3'>
-                <Flex>
+                <Flex justify={'between'}>
                     <Flex align={'center'}>
                         <NavLinks />
                     </Flex>
-                    {/* <SearchBar /> */}
+                    <Flex className='grow max-w-xl px-1'>
+                        <SearchBar />
+                    </Flex>
                     <AuthStatus />
                 </Flex>
             </nav >
