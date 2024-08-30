@@ -10,3 +10,5 @@ export const config = {
         '/issues/edit/:id+'
     ]
 }
+
+

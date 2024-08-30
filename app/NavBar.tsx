@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
 import { Skeleton } from '@/app/components';
-import SearchBar from './components/SearchBar';
+import SearchBar from './SearchBar';
 
 
 const NavBar = () => {
@@ -18,7 +18,7 @@ const NavBar = () => {
                     <Flex align={'center'}>
                         <NavLinks />
                     </Flex>
-                    <Flex className='grow max-w-xl px-1'>
+                    <Flex className='grow max-w-lg px-1'>
                         <SearchBar />
                     </Flex>
                     <AuthStatus />
