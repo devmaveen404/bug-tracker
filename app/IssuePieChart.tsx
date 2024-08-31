@@ -1,7 +1,7 @@
 'use client'
 import { Card } from "@radix-ui/themes";
 import React from "react";
-import { PieChart, Pie, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Tooltip, ResponsiveContainer, Label, Cell } from "recharts";
 
 interface Props {
     open: number;
@@ -17,24 +17,38 @@ const IssueBarChart = ({ open, inProgress, closed }: Props) => {
         { label: 'Closed', value: closed }
     ]
 
+    const COLORS = ['#E5484D', '#E54D2E', '#46A758'];
+
     return (
-        <Card>
-            <ResponsiveContainer width={'35%'} height={300}>
-                <PieChart >
-                    <Tooltip />
-                    <Pie
-                        data={data}
-                        dataKey="value"
-                        outerRadius={100}
-                        innerRadius={50}
-                        style={{ fill: 'var(--accent-8)' }}
-                        label={({ label, value }) =>
-                            `${label}: ${value}`
-                        }
-                    />
-                </PieChart>
-            </ResponsiveContainer>
-        </Card>
+        <div style={{ marginTop: '12px ', marginLeft: '12px', marginRight: '12px' }} >
+            <Card className="hover:shadow transition duration-400 border border-1 bg-black" variant="ghost">
+                <ResponsiveContainer width={'100%'} height={300} >
+                    <PieChart >
+                        <Pie
+                            data={data}
+                            dataKey="value"
+                            outerRadius={100}
+                            innerRadius={65}
+                            fill='#8884d8'
+                            // style={{ fill: 'var(--accent-11)', outline: 'none' }}
+                            label={({ label, value }) =>
+                                `${label}: ${value}`
+                            }
+                        >
+                            {/* <Label
+                                value="6" position="centerBottom" className='label-top' fontSize='27px'
+                            />
+                            <Label
+                                value="tasks left" position="centerTop" className='label'
+                            /> */}
+                            {
+                                data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]} />)
+                            }
+                        </Pie>
+                    </PieChart>
+                </ResponsiveContainer>
+            </Card>
+        </div>
     );
 };
 

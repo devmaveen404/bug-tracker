@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 
 const fetchSearchResults = async (query: string) => {
@@ -64,7 +65,10 @@ const SearchBar = () => {
                     <ul className='p-4 w-full'>
                         {results.map((result: any) => (
                             <li className='text-wrap transition duration-100 text-sm ease-in-out hover:bg-gray-700 rounded-md p-2' key={result.id}>
-                                <h2>{result.title}</h2>
+                                <Link href={`/issues/${result.id}`}>
+
+                                    <h2>{result.title}</h2>
+                                </Link>
                             </li>
                         ))}
                     </ul>

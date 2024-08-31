@@ -6,7 +6,7 @@ import { Skeleton } from '@/app/components'
 
 const loadingIssuePage = () => {
 
-    const issues = [1, 2, 3, 4, 5]
+    const issues = [1, 2, 3, 4, 5, 6, 7, 8]
 
     return (
         <Flex direction={'column'} gap={'4'} className='max-w-2xl p-7'>

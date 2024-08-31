@@ -12,7 +12,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
-import authImage from '../assets/issue tracker.png'
+import authImage from '@/app/assets/issue tracker.png'
 
 
 type signUpFormData = z.infer<typeof signUpFormSchema>
@@ -68,7 +68,7 @@ const AuthForm = () => {
                 </div>
                 <div className='flex justify-center items-center content-center h-screen mt-2'>
                     <Tabs.Root
-                        className="flex flex-col w-[50%] lg:w-[70%] rounded-lg p-4"
+                        className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] rounded-lg p-4 shadow"
                         defaultValue="tab1"
                     >
                         <GoogleSignInButton>SignIn with Google</GoogleSignInButton>

@@ -5,6 +5,9 @@ import LatestIssues from './LatestIssues';
 import IssueSummary from './IssueSummary';
 import { prisma } from '@/prisma/prismaClient';
 import IssueBarChart from './IssueBarChart';
+import IssuePieChart from './IssuePieChart';
+import CompletedIssues from './CompletedIssues';
+import OpenedIssues from './OpenedIssues';
 
 
 export default async function Home() {
@@ -18,15 +21,21 @@ export default async function Home() {
   const closed = await prisma.issue.count({ where: { status: 'CLOSED' } })
 
   return (
-    <div className='p-7'>
-      <Heading mb={'8'}>Welcome{session && <Em>{`, ${session.user!.name}`}</Em>}</Heading>
+    <div className='px-7'>
+      <Heading my={'8'}>Welcome{session && `, ${session.user!.name}.`}</Heading>
       {/* <IssuePieChart open={open} inProgress={inProgress} closed={closed}/> */}
       <Grid columns={{ initial: '1', md: '2' }} gap={'5'}>
         <Flex direction='column' gap={'5'}>
           <IssueSummary open={open} inProgress={inProgress} closed={closed} />
           <IssueBarChart open={open} inProgress={inProgress} closed={closed} />
         </Flex>
+
         <LatestIssues />
+      </Grid>
+      <Grid columns={{ initial: '1', md: '3' }} gap={'5'} className='mt-5'>
+        <CompletedIssues />
+        <OpenedIssues />
+        <IssuePieChart open={open} inProgress={inProgress} closed={closed} />
       </Grid>
     </div>
   )

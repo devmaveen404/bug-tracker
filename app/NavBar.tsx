@@ -13,7 +13,7 @@ const NavBar = () => {
 
     return (
         <Container maxWidth={'1440px'}>
-            <nav className='sticky top-0 z-10 bg-black p-3'>
+            <nav className='sticky top-0 z-10 bg-black p-3 mx-2 mt-2 rounded-md'>
                 <Flex justify={'between'}>
                     <Flex align={'center'}>
                         <NavLinks />
