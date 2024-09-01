@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptions = {
 
                 const passwordMatch = await bcrypt.compare(credentials.password, user.hashedPassword!)
 
-                return passwordMatch ? user : null
+                return passwordMatch ? { id: user.id, email: user.email } : null
             }
         }),
         GoogleProvider({
@@ -47,6 +47,9 @@ export const authOptions: NextAuthOptions = {
             return token
         },
         async session({ session, token }) {
+            if (token?.sub) {
+                session.user?.email
+            }
             return session
         }
     },

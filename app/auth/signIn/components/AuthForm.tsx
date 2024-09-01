@@ -66,7 +66,7 @@ const AuthForm = () => {
                         height={500}
                         alt='add new issue page' />
                 </div>
-                <div className='flex justify-center items-center content-center h-screen mt-2'>
+                <div className='flex justify-center items-center content-center mt-2'>
                     <Tabs.Root
                         className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] rounded-lg p-4 shadow"
                         defaultValue="tab1"

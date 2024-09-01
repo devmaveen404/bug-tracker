@@ -44,9 +44,22 @@ model User {
   // Optional for WebAuthn support
   Authenticator  Authenticator[]
 
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  assignedIssues Issue[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  assignedIssues      Issue[]
+  // reset password
+  resetToken          String? // Optional field for the reset token
+  resetTokenExpiry    DateTime? // Optional field for token expiry
+  passwordResetTokens PasswordResetToken[]
+}
+
+// to track multiple reset tokens for each user, along with their expiration times.
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model Account {
@@ -108,3 +121,5 @@ model Authenticator {
 
   @@id([userId, credentialID])
 }
+
+// password reset model
