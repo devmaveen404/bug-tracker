@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: 'Invalid token' }, { status: 400 });
         }
 
-        // Check if the token has expired (assuming 1 hour expiry)
+        // Check if the token has expired (with 1 hour expiry)
         const tokenExpiryTime = 1 * 60 * 60 * 1000; // 1 hour in milliseconds
         const tokenCreationTime = new Date(resetToken.createdAt).getTime(); // convert reset token to a timestamp
         const currentTime = new Date().getTime(); // get the current time

@@ -14,7 +14,7 @@ export default function RequestReset() {
         try {
             await axios.post('/api/auth/request-reset', { email });
             setMessage('Reset email sent! Check your inbox.');
-            router.push('/auth/reset-password')
+            // router.push('/auth/reset-password')
         } catch (error) {
             setMessage('Error sending reset email.');
             console.error('Error:', error); // Log the error
