@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { prisma } from '../../../../prisma/prismaClient'; 
+import { prisma } from '../../../../prisma/prismaClient';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 
@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: 'User not found' }, { status: 404 });
         }
 
+        // if user
         // Upsert the password reset token
         await prisma.passwordResetToken.upsert({
             where: { token: token },
@@ -35,18 +36,40 @@ export async function POST(request: NextRequest) {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS,
             },
+            tls: {
+                rejectUnauthorized: false, // Disable SSL certificate validation
+            },
         });
+
 
         const resetLink = `${process.env.BASE_URL}/auth/reset-password?token=${token}`;
 
+        // send reset email
         await transporter.sendMail({
+            from: `<${process.env.EMAIL_USER}>`, // Sender address
             to: email,
-            subject: 'Password Reset Request',
-            html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`,
+            subject: "Password Reset Request", // Subject line
+            text: `You requested a password reset. Click the following link to reset your password: ${resetLink}`, // Plain text body
+            html: `<p>You requested a password reset. Click <a href="${resetLink}">here</a> to reset your password. This link is valid for 1 hour.</p>`, // HTML body
         });
 
         return NextResponse.json({ message: 'Reset email sent' });
     } catch (error) {
-        return NextResponse.json({ message: 'Unable to reset' }, { status: 400 });
+        // Narrowing down the type of error
+        if (error instanceof z.ZodError) {
+            // Handle Zod schema validation errors
+            return NextResponse.json({ message: 'Invalid input', errors: error.errors }, { status: 400 });
+        } else if (error instanceof Error) {
+            // Handle generic errors
+            console.error('Error occurred during password reset request:', error);
+            return NextResponse.json({
+                message: error.message || 'An error occurred while processing your request',
+                details: error.stack || error,
+            }, { status: 400 });
+        } else {
+            // Fallback for any other types of errors (unknown type)
+            console.error('An unexpected error occurred:', error);
+            return NextResponse.json({ message: 'An unexpected error occurred' }, { status: 500 });
+        }
     }
 }

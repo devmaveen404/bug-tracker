@@ -13,6 +13,7 @@ import axios from 'axios';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import authImage from '@/app/assets/issue tracker.png'
+import Link from 'next/link';
 
 
 type signUpFormData = z.infer<typeof signUpFormSchema>
@@ -123,7 +124,8 @@ const AuthForm = () => {
                                     />
                                     {errors2.password && <ErrorMessage>{errors2.password.message}</ErrorMessage>}
                                 </fieldset>
-                                <div className="flex justify-end mt-8">
+                                <div className="flex justify-between items-center mt-8">
+                                    <Link className='text-sm hover:underline' href={'/auth/request-reset'}>forgot your password?</Link>
                                     <button className="inline-flex items-center justify-center rounded text-base font-medium leading-none h-[35px] bg-black text-white p-3 hover:text-white hover:bg-[var(--accent-11)] outline-none cursor-pointer transform transition duration-200">
                                         Sign In
                                     </button>

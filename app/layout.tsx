@@ -9,6 +9,7 @@ import { Container, Theme, ThemePanel, } from '@radix-ui/themes'
 import AuthProvider from './auth/Provider';
 import QueryClientProvider from './QueryClientProvider';
 import Pathname from './components/Pathname';
+import Custom404 from './[...not-found]/page';
 
 const inter = Inter({
   subsets: ['latin'],

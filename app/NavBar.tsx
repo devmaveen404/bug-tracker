@@ -1,7 +1,7 @@
 "use client";
 
-import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
-import { useSession } from 'next-auth/react';
+import { Avatar, Box, Button, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -73,13 +73,14 @@ const AuthStatus = () => {
                             <Text size={'2'}>{session.user!.email}</Text>
                         </DropdownMenu.Label>
                         <DropdownMenu.Item>
-                            <Link href={'/api/auth/signout'}>Log out</Link>
+                            <Button className='w-full size-0' onClick={() => signOut({ callbackUrl: '/auth/signout' })}> Log out</Button>
                         </DropdownMenu.Item>
                     </DropdownMenu.Content>
                 </DropdownMenu.Root>
-            )}
+            )
+            }
             {!session && <Link className='text-white' href={'/api/auth/signin'}>Log in</Link>}
-        </Box>
+        </Box >
     )
 }
 

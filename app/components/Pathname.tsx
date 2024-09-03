@@ -8,10 +8,10 @@ const Pathname = () => {
 
   const pathname = usePathname();
 
-  const noNavRoutes = ['/auth/signin', '/auth/signup', '/auth/reset-password', 'not-found'];
+  const noNavRoutes = ['/auth/signIn', '/auth/request-reset', '/auth/reset-password', '/auth/signout', 'not-found'];
 
-  // Handle no Navbar for 404 page and all routes in noNavRoutes
-  const shouldRenderNavbar = !noNavRoutes.includes(pathname) && pathname !== '/_error' && !pathname.includes('/_error');
+  // Handle and all routes in noNavRoutes
+  const shouldRenderNavbar = !noNavRoutes.includes(pathname)
 
 
 
