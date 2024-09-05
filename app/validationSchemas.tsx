@@ -16,8 +16,8 @@ export const patchIssueSchema = z.object({
 export const signUpFormSchema = z.object({
     name: z.string().min(1, 'Username is required').max(50).optional(),
     email: z.string().min(1, 'Email is required').email('Invalid email').optional(),
-    password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters').max(20).optional(),
-    confirmPassword: z.string().min(4, 'Password confirmation is required').max(20).optional(),
+    password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters').max(20).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/, "Password must include uppercase, lowercase, and a number"),
+    confirmPassword: z.string().min(1, 'Password confirmation is required').max(20).optional(),
 }).refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
     message: 'Password do not match',

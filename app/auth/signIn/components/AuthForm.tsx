@@ -1,5 +1,5 @@
 import GoogleSignInButton from '@/app/components/GoogleSignInButton'
-import React from 'react'
+import React, { useState } from 'react'
 import * as Tabs from '@radix-ui/react-tabs';
 import { Grid } from '@radix-ui/themes';
 import { signInFormSchema, signUpFormSchema } from '@/app/validationSchemas';
@@ -22,6 +22,9 @@ type signInFormData = z.infer<typeof signInFormSchema>
 
 
 const AuthForm = () => {
+
+    // track current tab to apply smooth transition
+    const [currentTab, setCurrentTab] = useState("tab1");
 
     const router = useRouter()
 
@@ -71,6 +74,7 @@ const AuthForm = () => {
                     <Tabs.Root
                         className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] rounded-lg p-4 shadow"
                         defaultValue="tab1"
+                        onValueChange={(value) => setCurrentTab(value)}
                     >
                         <GoogleSignInButton>SignIn with Google</GoogleSignInButton>
 
@@ -80,15 +84,19 @@ const AuthForm = () => {
                             <div className='flex-grow border-t border-gray-300'></div>
                         </div>
 
-                        <Tabs.List className="flex transition-all duration-200" aria-label="Manage your account">
+                        <Tabs.List className="flex" aria-label="Manage your account">
                             <Tabs.Trigger
-                                className="bg-white h-[30px] focus:outline-none data-[state=active]:underline data-[state=active]:underline-offset-8 first:border-none last:border-top-left-1px flex-1 flex items-center justify-center text-base cursor-default"
+                                className={`bg-white h-[30px] focus:outline-none transition duration-300 ease-in-out transform ${currentTab === "tab1" ? "underline underline-offset-8 text-black scale-105" : "text-gray-500"
+                                    } flex-1 flex items-center justify-center text-base cursor-pointer`}
+                                // className="bg-white h-[30px] focus:outline-none data-[state=active]:underline data-[state=active]:underline-offset-8 first:border-none last:border-top-left-1px flex-1 flex items-center justify-center text-base cursor-default"
                                 value="tab1"
                             >
                                 Sign In
                             </Tabs.Trigger>
                             <Tabs.Trigger
-                                className="bg-white h-[30px] focus:outline-none data-[state=active]:underline data-[state=active]:underline-offset-8 flex-1 flex items-center justify-center text-base shadow-none cursor-default"
+                                className={`bg-white h-[30px] focus:outline-none transition duration-300 ease-in-out transform ${currentTab === "tab2" ? "underline underline-offset-8 text-black scale-105" : "text-gray-500"
+                                    } flex-1 flex items-center justify-center text-base cursor-pointer`}
+                                // className="bg-white h-[30px] focus:outline-none data-[state=active]:underline data-[state=active]:underline-offset-8 flex-1 flex items-center justify-center text-base shadow-none cursor-default"
                                 value="tab2"
                             >
                                 Sign Up
@@ -96,7 +104,8 @@ const AuthForm = () => {
                         </Tabs.List>
                         <form onSubmit={handleSubmit2(onSubmitSignIn)}>
                             <Tabs.Content
-                                className="grow p-5 bg-white outline-none"
+                                className={`grow p-5 bg-white outline-none transition-opacity duration-300 transform ${currentTab === "tab1" ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute"
+                                    }`}
                                 value="tab1"
                             >
                                 <fieldset className="mb-[15px] w-full flex flex-col justify-start">
@@ -134,7 +143,8 @@ const AuthForm = () => {
                         </form>
                         <form onSubmit={handleSubmit(onSubmitSignUp)}>
                             <Tabs.Content
-                                className="grow p-5 bg-white outline-none"
+                                className={`grow p-5 bg-white outline-none transition-opacity duration-300 transform ${currentTab === "tab2" ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none absolute"
+                                    }`}
                                 value="tab2"
                             >
                                 <fieldset className="mb-[15px] w-full flex flex-col justify-start">

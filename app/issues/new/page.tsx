@@ -16,7 +16,7 @@ const IssueForm = dynamic(
 
 const newIssuePage = () => {
   return (
-    <Grid columns={{ initial: '1', md: '2' }}>
+    <Grid columns={{ initial: '1', md: '2' }} className='pt-20'>
       <IssueForm />
       <div className='justify-left items-right align-middle object-contain'>
         <Image

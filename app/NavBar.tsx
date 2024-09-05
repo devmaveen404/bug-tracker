@@ -4,16 +4,35 @@ import { Avatar, Box, Button, Container, DropdownMenu, Flex, Text } from '@radix
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Skeleton } from '@/app/components';
 import SearchBar from './SearchBar';
 
 
 const NavBar = () => {
 
+    // sticky navbar
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    // Effect to detect scroll position
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <Container maxWidth={'1440px'}>
-            <nav className='sticky top-0 z-10 bg-black p-3 mx-2 mt-2 rounded-md'>
+            <nav className={`w-full max-w-[1440px] fixed top-0 z-20 p-4 transition-all duration-300 
+                ${isScrolled ? 'bg-black/90 backdrop-blur-md shadow-md' : 'bg-black'}`}
+            >
                 <Flex justify={'between'}>
                     <Flex align={'center'}>
                         <NavLinks />
@@ -41,7 +60,7 @@ const NavLinks = () => {
     ]
 
     return (
-        <ul className='flex flex-row rounded-md space-x-3'>
+        <ul className='flex flex-row space-x-3'>
             {links.map(link => <li key={link.href}>
                 <Link className={`${link.href == currentPath ? "!bg-[var(--accent-11)] text-white" : "text-white"} nav-links`} href={link.href}>{link.label}</Link></li>)}
         </ul>
@@ -73,7 +92,7 @@ const AuthStatus = () => {
                             <Text size={'2'}>{session.user!.email}</Text>
                         </DropdownMenu.Label>
                         <DropdownMenu.Item>
-                            <Button className='w-full size-0' onClick={() => signOut({ callbackUrl: '/auth/signout' })}> Log out</Button>
+                            <button className='' onClick={() => signOut({ callbackUrl: '/auth/signout' })}> Log out</button>
                         </DropdownMenu.Item>
                     </DropdownMenu.Content>
                 </DropdownMenu.Root>

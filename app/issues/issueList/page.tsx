@@ -50,7 +50,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   })
 
   return (
-    <Grid columns={{ initial: '1', md: '2' }} className='p-7'>
+    <Grid columns={{ initial: '1', md: '2' }} className='p-7 pt-24'>
       <Flex direction={'column'} gap={'4'} className='max-w-2xl'>
         <IssueActions />
         <IssueTable searchParams={searchParams} issues={issues} />

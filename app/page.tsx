@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/route'
-import { Em, Flex, Grid, Heading } from '@radix-ui/themes';
+import { Flex, Grid, Heading } from '@radix-ui/themes';
 import LatestIssues from './LatestIssues';
 import IssueSummary from './IssueSummary';
 import { prisma } from '@/prisma/prismaClient';
@@ -21,8 +21,8 @@ export default async function Home() {
   const closed = await prisma.issue.count({ where: { status: 'CLOSED' } })
 
   return (
-    <div className='px-7'>
-      <Heading my={'8'}>Welcome{session && `, ${session.user!.name}.`}</Heading>
+    <div className='px-7 pt-28'>
+      <Heading mt={'7'} my={'8'}>Welcome{session && `, ${session.user!.name}.`}</Heading>
       {/* <IssuePieChart open={open} inProgress={inProgress} closed={closed}/> */}
       <Grid columns={{ initial: '1', md: '2' }} gap={'5'}>
         <Flex direction='column' gap={'5'}>
