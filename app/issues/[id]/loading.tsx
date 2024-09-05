@@ -4,7 +4,7 @@ import { Skeleton } from '@/app/components'
 
 const loadingIssueDetailsPage = () => {
     return (
-        <Box className='max-w-xl p-7'>
+        <Box className='max-w-xl p-7 pt-24'>
             < Skeleton />
             <Flex gap='3' my='2'>
                 {/* bagde */}

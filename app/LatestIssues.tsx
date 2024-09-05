@@ -15,7 +15,7 @@ const LatestIssues = async () => {
 	})
 
 	return (
-		<Card className='hover:shadow transition duration-400'>
+		<Card className='hover:shadow transition duration-400 bg-white'>
 			<Heading size={'4'} mb={'3'}>Most Recent Issues</Heading>
 			<Table.Root>
 				<Table.Body>

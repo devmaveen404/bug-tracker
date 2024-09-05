@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+// import image from '../issue-tracker/app/assets/background.png'
 
 const config: Config = {
   content: [
@@ -9,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'custom-background': "url('/background.png')",
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
