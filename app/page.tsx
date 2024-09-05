@@ -8,6 +8,7 @@ import IssueBarChart from './IssueBarChart';
 import IssuePieChart from './IssuePieChart';
 import CompletedIssues from './CompletedIssues';
 import OpenedIssues from './OpenedIssues';
+import { Metadata } from 'next';
 
 
 export default async function Home() {
@@ -39,4 +40,10 @@ export default async function Home() {
       </Grid>
     </div>
   )
+}
+
+// adding metadata
+export const metadata: Metadata = {
+  title: 'Bug Tracker - Dashboard',
+  description: 'This page contains the summary of bugs'
 }

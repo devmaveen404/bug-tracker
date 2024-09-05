@@ -7,6 +7,7 @@ import IssueTable, { columnNames, IssueQuery } from './IssueTable'
 import { Flex, Grid } from '@radix-ui/themes'
 import issueListImage from '../../assets/completed.png'
 import Image from 'next/image'
+import { Metadata } from 'next'
 
 
 interface Props {
@@ -71,5 +72,11 @@ const IssuesPage = async ({ searchParams }: Props) => {
 // cache on the server
 // to render page dynamically at build time
 export const dynamic = 'force-dynamic';
+
+// adding metadata
+export const metadata: Metadata = {
+  title: 'Bug Tracker - all issues',
+  description: 'This page contains the list of bugs'
+}
 
 export default IssuesPage

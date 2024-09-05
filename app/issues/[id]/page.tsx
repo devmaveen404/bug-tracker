@@ -47,4 +47,15 @@ const IssueDetailsPage = async ({ params }: Props) => {
     )
 };
 
+// add dynamic metadata based on the issue title
+export async function generateMetadata({ params }: Props) {
+    // fetching issue
+    const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) } })
+
+    return {
+        title: issue?.title,
+        description: 'Details of bug' 
+    }
+}
+
 export default IssueDetailsPage; 
