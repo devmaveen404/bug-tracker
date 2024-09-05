@@ -8,11 +8,16 @@ import DeleteIssueButton from './DeleteIssueButton';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import AssigneeSelect from './AssigneeSelect';
+import { cache } from 'react';
 
 interface Props {
     params: { id: string }
 }
 
+// since prisma is called twice to get a specific user, react cache is used to reduce traffic
+const fetchUser = cache((issueId: number) =>
+    prisma.issue.findUnique({ where: { id: issueId } })
+)
 
 const IssueDetailsPage = async ({ params }: Props) => {
     //get current user session, from auth/route.tsx 
@@ -22,9 +27,10 @@ const IssueDetailsPage = async ({ params }: Props) => {
     // if (typeof params.id != 'number') notFound();
 
     //fetch an issue from prisma
-    const issue = await prisma.issue.findUnique({
-        where: { id: parseInt(params.id) }
-    });
+    // const issue = await prisma.issue.findUnique({
+    //     where: { id: parseInt(params.id) }
+    // });
+    const issue = await fetchUser(parseInt(params.id));
 
     // if issue doesn't exist redirect user to the not found page
     if (!issue)
@@ -50,11 +56,11 @@ const IssueDetailsPage = async ({ params }: Props) => {
 // add dynamic metadata based on the issue title
 export async function generateMetadata({ params }: Props) {
     // fetching issue
-    const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) } })
+    const issue = await fetchUser(parseInt(params.id));
 
     return {
         title: issue?.title,
-        description: 'Details of bug' 
+        description: 'Details of bug'
     }
 }
 
