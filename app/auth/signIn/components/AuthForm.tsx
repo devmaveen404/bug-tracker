@@ -62,7 +62,7 @@ const AuthForm = () => {
 
     return (
         <>
-            <Grid columns={{ initial: '1', md: '2' }} justify={'between'} >
+            <Grid columns={{ initial: '1', md: '3' }} >
                 <div className='hidden lg:flex'>
                     <Image
                         src={authImage}
@@ -70,9 +70,9 @@ const AuthForm = () => {
                         height={500}
                         alt='add new issue page' />
                 </div>
-                <div className='flex justify-center items-center content-center mt-2'>
+                <div className='flex justify-center items-baseline mt-2 col-span-2'>
                     <Tabs.Root
-                        className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] rounded-lg p-4 shadow"
+                        className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] p-4"
                         defaultValue="tab1"
                         onValueChange={(value) => setCurrentTab(value)}
                     >

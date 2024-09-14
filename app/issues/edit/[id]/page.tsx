@@ -3,6 +3,8 @@ import { prisma } from '@/prisma/prismaClient'
 import { notFound } from 'next/navigation'
 import IssueFormSkeleton from './loading'
 import dynamic from 'next/dynamic'
+import IssueStatusUpdate from '../issueStatusUpdate'
+import { Flex } from '@radix-ui/themes'
 
 
 const IssueForm = dynamic(() => import('../../_components/IssueForm'),
@@ -26,8 +28,11 @@ const EditIssuePage = async ({ params }: Props) => {
     if (!issue) notFound();
 
     return (
-        <div className='pt-20'>
-            <IssueForm issue={issue} />
+        <div className='max-w-xl p-7 mt-16'>
+            <IssueStatusUpdate />
+            <div className='pt-4'>
+                <IssueForm issue={issue} />
+            </div>
         </div>
     )
 }

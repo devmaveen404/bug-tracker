@@ -84,7 +84,7 @@ const SearchBar = () => {
                         placeholder="Search issues..." />
                 </div>
                 <div
-                    className={`absolute opacity-95 z-10 backdrop-blur-2xl top-12 w-full bg-gray-800 rounded-md text-gray-300 flex grow transition-all duration-300 ease-in-out ${isDropdownOpen ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0 overflow-hidden'
+                    className={`absolute opacity-95 z-10 backdrop-blur-2xl top-12 w-full bg-gray-800 rounded-md text-gray-300 flex grow transition-all duration-300 ease-in-out overflow-hidden ${isDropdownOpen ? 'opacity-100 max-h-fit' : 'opacity-0 max-h-0 overflow-hidden'
                         } ${isTransitioning && 'opacity-0 max-h-0'}`}
                 >
                     {loading ? (
@@ -93,7 +93,7 @@ const SearchBar = () => {
                         <ul className='p-4 w-full'>
                             {results.map((result: any) => (
                                 <li
-                                    className='text-wrap transition duration-100 text-sm ease-in-out hover:bg-gray-700 rounded-md p-2'
+                                    className='text-wrap transition duration-100 text-sm ease-in-out hover:bg-gray-700 rounded-md p-2 '
                                     key={result.id}
                                     onClick={handleResultClick} // Close dropdown on result click
                                 >

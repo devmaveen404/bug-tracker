@@ -47,7 +47,7 @@ const IssueTable = ({ searchParams, issues }: Props) => {
                 {issues.map(issue => (
                     <Table.Row key={issue.id}>
                         <Table.Cell>
-                            <Link href={`/issues/${issue.id}`} className='hover:text-orange-800 hover:underline'>
+                            <Link href={`/issues/${issue.id}`} className='hover:underline'>
                                 {issue.title}
                             </Link>
                             <div className='block md:hidden'><IssueStatusBadge status={issue.status} /></div>
