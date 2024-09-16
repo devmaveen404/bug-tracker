@@ -22,6 +22,7 @@ export default async function Home() {
   const closed = await prisma.issue.count({ where: { status: 'CLOSED' } })
 
   return (
+    <>
     <div className='px-7 pt-28 lg:bg-custom-background bg-white bg-no-repeat bg-center bg-cover pb-5'>
       <Heading mt={'7'} my={'8'}>Welcome{session && `, ${session.user!.name}.`}</Heading>
       {/* <IssuePieChart open={open} inProgress={inProgress} closed={closed}/> */}
@@ -39,6 +40,7 @@ export default async function Home() {
         <IssuePieChart open={open} inProgress={inProgress} closed={closed} />
       </Grid>
     </div>
+    </>
   )
 }
 

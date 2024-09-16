@@ -63,7 +63,7 @@ const AuthForm = () => {
     return (
         <>
             <Grid columns={{ initial: '1', md: '3' }} >
-                <div className='hidden lg:flex'>
+                <div className='hidden lg:flex sticky'>
                     <Image
                         src={authImage}
                         width={500}

@@ -1,10 +1,10 @@
 'use client'
-import { Button, Callout, TextField } from '@radix-ui/themes'
+import { Button, Callout, Select, TextField } from '@radix-ui/themes'
 import "easymde/dist/easymde.min.css";
 // handling form submission
 import { useForm, Controller } from 'react-hook-form'
 import axios from 'axios';// submit data to database
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,25 +12,25 @@ import { IssueSchema } from '@/app/validationSchemas';
 import { z } from 'zod'
 import ErrorMessage from '@/app/components/ErrorMessage';
 import { Spinner } from '@radix-ui/themes';
-import { Issue } from '@prisma/client';
-import SimpleMDE from 'react-simplemde-editor';
+import { Issue, Status } from '@prisma/client';
+import dynamic from 'next/dynamic';
+// import SimpleMDE from 'react-simplemde-editor';
 
-// since markdown editor(client component) is rendered on server, markdown should be lazy loaded
-// const SimpleMDE = dynamic(() => import('react-simplemde-editor'),
-//     { ssr: false }
-// );
+// Lazy load the markdown editor
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
 
-// shape of the issue form
-// interface IssueForm {
-//     title: string
-//     description: string
-// }
 // shape of issue form based on schema
 type IssueFormData = z.infer<typeof IssueSchema>
 
 interface Props {
-    issue?: Issue
+    issue?: Issue;
 }
+
+const statuses: { label: string, value?: Status }[] = [
+    { label: 'Open', value: 'OPEN' },
+    { label: 'In Progress', value: 'IN_PROGRESS' },
+    { label: 'Closed', value: 'CLOSED' }
+]
 
 const IssueForm = ({ issue }: Props) => {
 
@@ -44,8 +44,33 @@ const IssueForm = ({ issue }: Props) => {
     const [error, setError] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const onSubmit = useCallback(async (data: IssueFormData) => {
+        try {
+            setIsSubmitting(true)
+            if (issue)
+                axios.patch('/api/issues/' + issue.id, data)
+            else
+                await axios.post('/api/issues', data)
+            router.push('/issues/issueList')
+            // to refresh the issues 
+            router.refresh();
+        } catch (error) {
+            setIsSubmitting(false)
+            setError('Input details properly.')
+        }
+    }, [issue, router]);
+
+    const handleStatusChange = useCallback(async (selectedStatus: Status) => {
+        try {
+            if (issue)
+                await axios.patch(`/api/issues/${issue.id}`, { status: selectedStatus })
+        } catch (error) {
+            error
+        }
+    }, [issue]);
+
     return (
-        <div className='max-w-xl px-4'>
+        <div className='max-w-xl p-7'>
             {error && <Callout.Root color='red' className='mb-5' >
                 <Callout.Icon>
                     <IoInformationCircleOutline />
@@ -56,22 +81,34 @@ const IssueForm = ({ issue }: Props) => {
             </Callout.Root>}
             <form
                 className='space-y-3'
-                onSubmit={handleSubmit(async (data) => {
-                    try {
-                        setIsSubmitting(true)
-                        if (issue)
-                            axios.patch('/api/issues' + issue.id, data)
-                        else
-                            await axios.post('/api/issues', data)
-                        router.push('/issues/issueList')
-                        // to refresh the issues 
-                        router.refresh();
-                    } catch (error) {
-                        setIsSubmitting(false)
-                        setError('Input details properly.')
-                    }
-                })}>
-                <TextField.Root defaultValue={issue?.title} placeholder='Title...' {...register('title')} />
+                onSubmit={handleSubmit(onSubmit)}>
+                <TextField.Root style={{ paddingRight: '8rem' }} defaultValue={issue?.title} placeholder='Title...' {...register('title')}>
+                    {issue && <TextField.Slot style={{ position: 'relative' }}>
+                        <Select.Root
+                            defaultValue={issue?.status}
+                            onValueChange={handleStatusChange}
+                        >
+                            <Select.Trigger
+                                placeholder='Edit status...'
+                                style={{
+                                    position: 'absolute',
+                                    left: 410,
+                                    height: '60%',
+                                    padding: '0 0.5rem',
+                                    border: 'none',
+                                    background: 'transparent',
+                                }}
+                            />
+                            <Select.Content>
+                                {statuses.map(status => (
+                                    <Select.Item key={status.value} value={status.value ?? 'All'}>
+                                        {status.label}
+                                    </Select.Item>
+                                ))}
+                            </Select.Content>
+                        </Select.Root>
+                    </TextField.Slot>}
+                </TextField.Root>
                 {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
                 <Controller
                     name='description'

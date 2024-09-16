@@ -1,9 +1,9 @@
 import React from 'react'
 import dynamic from 'next/dynamic';
 import IssueFormSkeleton from './loading';
-import { Container, Grid } from '@radix-ui/themes';
+import { Grid } from '@radix-ui/themes';
 import Image from 'next/image';
-import newIssueImage from '../../assets/join.png'
+import newIssueImage from '../../assets/idea.svg'
 
 // render issueform dynamically
 const IssueForm = dynamic(
@@ -21,8 +21,8 @@ const newIssuePage = () => {
       <div className='justify-left items-right align-middle object-contain'>
         <Image
           src={newIssueImage}
-          width={500}
-          height={500}
+          width={450}
+          height={450}
           alt='add new issue page'
         />
       </div>
