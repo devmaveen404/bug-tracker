@@ -23,6 +23,8 @@ model Issue {
   assignedToUserId String?  @db.VarChar(255)
   // relationship btw issue and user model
   assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
+
+  @@index([assignedToUserId])
 }
 
 //enum is a set of constant values
@@ -62,6 +64,8 @@ model PasswordResetToken {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
 model Account {
