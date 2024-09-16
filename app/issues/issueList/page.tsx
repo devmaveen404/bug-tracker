@@ -5,7 +5,7 @@ import IssueActions from './IssueActionButtons'
 import Pagination from '@/app/components/Pagination'
 import IssueTable, { columnNames, IssueQuery } from './IssueTable'
 import { Flex, Grid } from '@radix-ui/themes'
-import issueListImage from '../../assets/completed.png'
+import issueListImage from '../../assets/issue.svg'
 import Image from 'next/image'
 import { Metadata } from 'next'
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Box, Button, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
+import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';

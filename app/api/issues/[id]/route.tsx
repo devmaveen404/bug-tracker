@@ -41,7 +41,8 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
         data: {
             title: body.title,
             description: body.description,
-            assignedToUserId: body.assignedToUserId
+            assignedToUserId: body.assignedToUserId,
+            status: body.status
         }
     })
 
