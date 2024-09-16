@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]/route'
+import { authOptions } from "@/app/lib/auth";
 import { Flex, Grid, Heading } from '@radix-ui/themes';
 import LatestIssues from './LatestIssues';
 import IssueSummary from './IssueSummary';

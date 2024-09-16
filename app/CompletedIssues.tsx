@@ -18,10 +18,10 @@ const LatestIssues = async () => {
             <Table.Root>
                 <Table.Body>
                     {issues.map(issue => (
-                        <Table.Row>
+                        <Table.Row key={issue.id}>
                             <Table.Cell>
                                 <Flex direction={'column'} align={'start'} gap={'2'}>
-                                    <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                                    <Link key={issue.id} href={`/issues/${issue.id}`}>{issue.title}</Link>
                                     <IssueStatusBadge status={issue.status} />
                                 </Flex>
                             </Table.Cell>

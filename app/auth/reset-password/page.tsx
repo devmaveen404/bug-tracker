@@ -1,23 +1,32 @@
 'use client'
-import { useState } from 'react';
+
+import { Suspense } from 'react'
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter, useSearchParams } from 'next/navigation';
-
 import { z } from 'zod';
+import Skeleton from 'react-loading-skeleton';
 
 // Define the Zod schema for the new password
 const newPasswordSchema = z.string().min(8, "Password must be at least 8 characters long").regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/, "Password must include uppercase, lowercase, and a number");
 
-export default function ResetPassword() {
+function ResetPasswordForm() {
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false); // Loading state
   const [passwordStrength, setPasswordStrength] = useState(''); // Password strength indicator
+  const [token, setToken] = useState<string | null>(null); // Store token in state
+
   const router = useRouter();
   // accessing query parameters
   const searchParams = useSearchParams();
+
   // retrieve token from the url
-  const token = searchParams.get('token') as string;
+  // Wait until the client-side to get the token
+  useEffect(() => {
+    const tokenFromParams = searchParams.get('token');
+    setToken(tokenFromParams);
+  }, [searchParams]);
 
   // validate inputted password
   const checkPasswordStrength = (password: string) => {
@@ -105,4 +114,12 @@ export default function ResetPassword() {
       </div>
     </div>
   );
+}
+
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={<Skeleton count={2} />}>
+      <ResetPasswordForm />
+    </Suspense>
+  )
 }

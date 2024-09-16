@@ -11,7 +11,7 @@ const statuses: { label: string, value?: Status }[] = [
     { label: 'Closed', value: 'CLOSED' }
 ]
 
-const issueStatusFilter = () => {
+const IssueStatusFilter = () => {
     const router = useRouter();
 
     //access current query parameters with this hook
@@ -45,4 +45,4 @@ const issueStatusFilter = () => {
     )
 };
 
-export default issueStatusFilter
+export default IssueStatusFilter

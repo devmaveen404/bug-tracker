@@ -4,7 +4,7 @@ import { patchIssueSchema } from "@/app/validationSchemas";
 import { prisma } from "@/prisma/prismaClient";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/auth";
 
 
 //update issue, update issue to assigned user  

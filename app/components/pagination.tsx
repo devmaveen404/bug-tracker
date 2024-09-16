@@ -13,11 +13,10 @@ interface Props {
     currentPage: number
 }
 
-const pagination = ({ itemCount, pageSize, currentPage }: Props) => {
+const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
 
     // total number of pages
     const pageCount = Math.ceil(itemCount / pageSize)
-    if (pageCount <= 1) return null
 
     // update the current url
     const router = useRouter();
@@ -31,6 +30,8 @@ const pagination = ({ itemCount, pageSize, currentPage }: Props) => {
         router.push('?' + params.toString());
     }
 
+    // If pageCount is less than or equal to 1, do not display pagination controls
+    if (pageCount <= 1) return null
 
     return (
         <Flex align={'center'} gap={'2'}>
@@ -61,4 +62,4 @@ const pagination = ({ itemCount, pageSize, currentPage }: Props) => {
     )
 }
 
-export default pagination
+export default Pagination

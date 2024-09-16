@@ -2,7 +2,7 @@ import { prisma } from "@/prisma/prismaClient";
 import { NextRequest, NextResponse } from "next/server";
 import { IssueSchema } from '@/app/validationSchemas'
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/auth";
 
 // data validation
 

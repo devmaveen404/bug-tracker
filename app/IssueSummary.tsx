@@ -25,8 +25,8 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
     return (
         <Flex gap={'4'}>
             {statuses.map(status => (
-                <div style={{ margin: '10px ' }}>
-                    <Card key={status.label} className={`hover:shadow border border-gray-200 transition duration-400 ${status.style} m-0`} variant='ghost'>
+                <div key={status.label} style={{ margin: '10px ' }}>
+                    <Card className={`hover:shadow border border-gray-200 transition duration-400 ${status.style} m-0`} variant='ghost'>
                         <Flex direction={'column'} gap={'2'}>
                             <Link
                                 className={`text-sm font-medium`}

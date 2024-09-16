@@ -2,12 +2,11 @@
 // Request Password Reset Page
 import { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation'; ``
 
 export default function RequestReset() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const router = useRouter();
+    // const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

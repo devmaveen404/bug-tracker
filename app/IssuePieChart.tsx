@@ -1,7 +1,7 @@
 'use client'
 import { Card } from "@radix-ui/themes";
 import React from "react";
-import { PieChart, Pie, Tooltip, ResponsiveContainer, Label, Cell } from "recharts";
+import { PieChart, Pie, ResponsiveContainer, Cell } from "recharts";
 
 interface Props {
     open: number;
@@ -42,7 +42,7 @@ const IssueBarChart = ({ open, inProgress, closed }: Props) => {
                                 value="tasks left" position="centerTop" className='label'
                             /> */}
                             {
-                                data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]} />)
+                                data.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)
                             }
                         </Pie>
                     </PieChart>
