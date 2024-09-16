@@ -6,9 +6,11 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider     = "mysql"
   // environment variable in the root
-  url      = env("DATABASE_URL")
+  url          = env("DATABASE_URL")
+  // disable foreign key constraint
+  relationMode = "prisma"
 }
 
 model Issue {
