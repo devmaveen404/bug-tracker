@@ -105,6 +105,7 @@ model Session {
 }
 
 model VerificationToken {
+  id         String   @id @default(cuid()) // add primary key
   identifier String
   token      String
   expires    DateTime
