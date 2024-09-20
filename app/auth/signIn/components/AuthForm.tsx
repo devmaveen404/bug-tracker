@@ -1,7 +1,7 @@
 import GoogleSignInButton from '@/app/components/GoogleSignInButton'
 import React, { useState } from 'react'
 import * as Tabs from '@radix-ui/react-tabs';
-import { Grid } from '@radix-ui/themes';
+import { Flex, Grid } from '@radix-ui/themes';
 import { signInFormSchema, signUpFormSchema } from '@/app/validationSchemas';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +14,7 @@ import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import authImage from '@/app/assets/issue tracker.png'
 import Link from 'next/link';
+import logo from '@/app/assets/logo.png'
 
 
 type signUpFormData = z.infer<typeof signUpFormSchema>
@@ -29,7 +30,10 @@ const AuthForm = () => {
     const router = useRouter()
 
     // logic for signup user
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<signUpFormData>({ resolver: zodResolver(signUpFormSchema) })
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<signUpFormData>({
+        mode: 'onChange',  // Validate inputs as the user types
+        resolver: zodResolver(signUpFormSchema)
+    })
     const onSubmitSignUp = async (data: z.infer<typeof signUpFormSchema>) => {
         const response = await axios.post('/api/register', data)
         // if response is ok, redirect user to the sign in page
@@ -44,7 +48,10 @@ const AuthForm = () => {
 
 
     // logic for signin user
-    const { register: register2, handleSubmit: handleSubmit2, reset: reset2, formState: { errors: errors2 } } = useForm<signInFormData>({ mode: 'onBlur', resolver: zodResolver(signInFormSchema) })
+    const { register: register2, handleSubmit: handleSubmit2, reset: reset2, formState: { errors: errors2 } } = useForm<signInFormData>({
+        mode: 'onChange',
+        resolver: zodResolver(signInFormSchema)
+    })
     const onSubmitSignIn = async (data: z.infer<typeof signInFormSchema>) => {
         const signInData = await signIn('credentials', {
             email: data.email,
@@ -72,10 +79,14 @@ const AuthForm = () => {
                 </div>
                 <div className='flex justify-center items-baseline mt-2 col-span-2'>
                     <Tabs.Root
-                        className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] p-4"
+                        className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] p-4 shadow lg:shadow-none rounded-md"
                         defaultValue="tab1"
                         onValueChange={(value) => setCurrentTab(value)}
                     >
+                        <Flex justify={'center'} mb={'4'}>
+                            <Image src={logo} alt='logo' width={45} height={45} className='lg:hidden' />
+                        </Flex>
+
                         <GoogleSignInButton>SignIn with Google</GoogleSignInButton>
 
                         <div className='relative flex  px-10 mb-4 items-center'>
@@ -86,7 +97,7 @@ const AuthForm = () => {
 
                         <Tabs.List className="flex" aria-label="Manage your account">
                             <Tabs.Trigger
-                                className={`bg-white h-[30px] focus:outline-none transition duration-300 ease-in-out transform ${currentTab === "tab1" ? "underline underline-offset-8 text-black scale-105" : "text-gray-500"
+                                className={`bg-white h-[30px] focus:outline-none transition duration-300 ease-in-out transform font-semibold ${currentTab === "tab1" ? "text-black scale-110" : "text-gray-500"
                                     } flex-1 flex items-center justify-center text-base cursor-pointer`}
                                 // className="bg-white h-[30px] focus:outline-none data-[state=active]:underline data-[state=active]:underline-offset-8 first:border-none last:border-top-left-1px flex-1 flex items-center justify-center text-base cursor-default"
                                 value="tab1"
@@ -94,7 +105,7 @@ const AuthForm = () => {
                                 Sign In
                             </Tabs.Trigger>
                             <Tabs.Trigger
-                                className={`bg-white h-[30px] focus:outline-none transition duration-300 ease-in-out transform ${currentTab === "tab2" ? "underline underline-offset-8 text-black scale-105" : "text-gray-500"
+                                className={`bg-white h-[30px] focus:outline-none transition duration-300 ease-in-out transform font-semibold ${currentTab === "tab2" ? "text-black scale-110" : "text-gray-500"
                                     } flex-1 flex items-center justify-center text-base cursor-pointer`}
                                 // className="bg-white h-[30px] focus:outline-none data-[state=active]:underline data-[state=active]:underline-offset-8 flex-1 flex items-center justify-center text-base shadow-none cursor-default"
                                 value="tab2"
@@ -114,7 +125,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register2('email')}
-                                        className="grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] focus:shadow-[0_0_0_2px] outline-none"
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                            ${errors2.email ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="email"
                                         placeholder='example@.com'
                                     />
@@ -126,7 +138,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register2('password')}
-                                        className="grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] focus:shadow-[0_0_0_2px] outline-none"
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                            ${errors2.password ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="password"
                                         placeholder="*******"
                                         type='password'
@@ -156,7 +169,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('name')}
-                                        className="rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] focus:shadow-[0_0_0_2px] outline-none"
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                            ${errors.name ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="name"
                                         placeholder='e.g Maven'
                                     />
@@ -171,7 +185,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('email')}
-                                        className="grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] focus:shadow-[0_0_0_2px] outline-none"
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                            ${errors.email ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="email"
                                         placeholder='example@.com'
                                     />
@@ -186,7 +201,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('password')}
-                                        className="grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] focus:shadow-[0_0_0_2px] outline-none"
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                            ${errors.password ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="Password"
                                         placeholder='enter password'
                                     />
@@ -201,7 +217,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('confirmPassword')}
-                                        className="rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] focus:shadow-[0_0_0_2px] outline-none"
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                            ${errors.confirmPassword ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="confirmPassword"
                                         placeholder='re-enter password'
                                     />

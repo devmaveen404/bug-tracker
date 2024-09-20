@@ -1,7 +1,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic';
 import IssueFormSkeleton from './loading';
-import { Grid } from '@radix-ui/themes';
+import { Box, Flex, Grid } from '@radix-ui/themes';
 import Image from 'next/image';
 import newIssueImage from '../../../assets/edit.svg'
 import { prisma } from '@/prisma/prismaClient';
@@ -31,17 +31,17 @@ const newIssuePage = async ({ params }: Props) => {
 
     return (
         <Grid columns={{ initial: '1', md: '2' }} className='pt-20'>
-            <div className='flex '>
-                <IssueForm issue={issue}  />
-            </div>
-            <div className='justify-center items-center object-contain'>
+            <IssueForm issue={issue} />
+            <Flex justify={'center'}>
                 <Image
                     src={newIssueImage}
                     width={450}
                     height={450}
                     alt='add new issue page'
+                    objectFit='contain'
+                    className='hidden lg:flex'
                 />
-            </div>
+            </Flex>
         </Grid>
     )
 }

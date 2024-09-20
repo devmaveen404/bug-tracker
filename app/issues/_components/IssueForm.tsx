@@ -56,7 +56,7 @@ const IssueForm = ({ issue }: Props) => {
             router.refresh();
         } catch (error) {
             setIsSubmitting(false)
-            setError('Input details properly.')
+            setError('Something went wrong, try logging in.')
         }
     }, [issue, router]);
 
@@ -82,33 +82,33 @@ const IssueForm = ({ issue }: Props) => {
             <form
                 className='space-y-3'
                 onSubmit={handleSubmit(onSubmit)}>
-                <TextField.Root style={{ paddingRight: '8rem' }} defaultValue={issue?.title} placeholder='Title...' {...register('title')}>
-                    {issue && <TextField.Slot style={{ position: 'relative' }}>
-                        <Select.Root
-                            defaultValue={issue?.status}
-                            onValueChange={handleStatusChange}
-                        >
-                            <Select.Trigger
-                                placeholder='Edit status...'
-                                style={{
-                                    position: 'absolute',
-                                    left: 410,
-                                    height: '60%',
-                                    padding: '0 0.5rem',
-                                    border: 'none',
-                                    background: 'transparent',
-                                }}
-                            />
-                            <Select.Content>
-                                {statuses.map(status => (
-                                    <Select.Item key={status.value} value={status.value ?? 'All'}>
-                                        {status.label}
-                                    </Select.Item>
-                                ))}
-                            </Select.Content>
-                        </Select.Root>
-                    </TextField.Slot>}
-                </TextField.Root>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                    <TextField.Root style={{ paddingRight: '8rem', flex: 1 }} defaultValue={issue?.title} placeholder='Title...' {...register('title')}>
+                        {issue && <TextField.Slot>
+                            <Select.Root
+                                defaultValue={issue?.status}
+                                onValueChange={handleStatusChange}
+                            >
+                                <Select.Trigger
+                                    placeholder='Edit status...'
+                                    style={{
+                                        height: '60%',
+                                        padding: '0 0.5rem',
+                                        border: 'none',
+                                        background: 'transparent',
+                                    }}
+                                />
+                                <Select.Content>
+                                    {statuses.map(status => (
+                                        <Select.Item key={status.value} value={status.value ?? 'All'}>
+                                            {status.label}
+                                        </Select.Item>
+                                    ))}
+                                </Select.Content>
+                            </Select.Root>
+                        </TextField.Slot>}
+                    </TextField.Root>
+                </div>
                 {errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
                 <Controller
                     name='description'
