@@ -15,6 +15,7 @@ import Image from 'next/image';
 import authImage from '@/app/assets/issue tracker.png'
 import Link from 'next/link';
 import logo from '@/app/assets/logo.png'
+import styles from './InputStyles.module.css'
 
 
 type signUpFormData = z.infer<typeof signUpFormSchema>
@@ -125,8 +126,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register2('email')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
-                                            ${errors2.email ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
+                                        className={`${styles.inputBase} grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
+                                            ${errors2.email ? 'focus-visible:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus-visible:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="email"
                                         placeholder='example@.com'
                                     />
@@ -138,8 +139,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register2('password')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
-                                            ${errors2.password ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
+                                        className={`${styles.inputBase} grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
+                                            ${errors2.password ? 'focus-visible:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus-visible:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="password"
                                         placeholder="*******"
                                         type='password'
@@ -169,8 +170,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('name')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
-                                            ${errors.name ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
+                                        className={`${styles.inputBase} grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
+                                            ${errors.name ? 'focus-visible:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus-visible:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="name"
                                         placeholder='e.g Maven'
                                     />
@@ -185,8 +186,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('email')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
-                                            ${errors.email ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
+                                        className={`${styles.inputBase} grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
+                                            ${errors.email ? 'focus-visible:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus-visible:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="email"
                                         placeholder='example@.com'
                                     />
@@ -201,8 +202,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('password')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
-                                            ${errors.password ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
+                                        className={`${styles.inputBase} grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
+                                            ${errors.password ? 'focus-visible:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus-visible:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="Password"
                                         placeholder='enter password'
                                     />
@@ -217,8 +218,8 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('confirmPassword')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
-                                            ${errors.confirmPassword ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
+                                        className={`${styles.inputBase} grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
+                                            ${errors.confirmPassword ? 'focus-visible:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus-visible:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="confirmPassword"
                                         placeholder='re-enter password'
                                     />

@@ -89,25 +89,27 @@ const AuthStatus = () => {
 
 
     return (
-        <Box>
+        <Flex justify={'center'}>
             {session && (
-                <DropdownMenu.Root>
-                    <DropdownMenu.Trigger>
-                        <Avatar
-                            src={session.user!.image || "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"}
-                            fallback='#'
-                            size={'1'}
-                            radius='full' />
-                    </DropdownMenu.Trigger>
-                    <DropdownMenu.Content>
-                        <DropdownMenu.Label>
-                            <Text size={'2'}>{session.user!.email}</Text>
-                        </DropdownMenu.Label>
-                        <DropdownMenu.Item>
-                            <IconButton className='' onClick={() => signOut({ callbackUrl: '/auth/signout' })}> Log out</IconButton>
-                        </DropdownMenu.Item>
-                    </DropdownMenu.Content>
-                </DropdownMenu.Root>
+                <Flex justify={'center'} align={'center'} p={'1'}>
+                    <DropdownMenu.Root>
+                        <DropdownMenu.Trigger>
+                            <Avatar
+                                src={session.user!.image || "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"}
+                                fallback='#'
+                                size={'1'}
+                                radius='full' />
+                        </DropdownMenu.Trigger>
+                        <DropdownMenu.Content>
+                            <DropdownMenu.Label>
+                                <Text size={'2'}>{session.user!.email}</Text>
+                            </DropdownMenu.Label>
+                            <DropdownMenu.Item>
+                                <button className='' onClick={() => signOut({ callbackUrl: '/auth/signout' })}> Log out</button>
+                            </DropdownMenu.Item>
+                        </DropdownMenu.Content>
+                    </DropdownMenu.Root>
+                </Flex>
             )}
             {!session &&
                 <Flex justify={'center'} align={'center'} p={'1'}>
@@ -116,7 +118,7 @@ const AuthStatus = () => {
                         </IconButton>
                     </Link>
                 </Flex>}
-        </Box >
+        </Flex>
     )
 }
 

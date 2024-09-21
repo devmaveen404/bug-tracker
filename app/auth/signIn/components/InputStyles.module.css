@@ -1,0 +1,5 @@
+.inputBase {
+    -webkit-appearance: none;
+    appearance: none;
+    z-index: 10;
+}
