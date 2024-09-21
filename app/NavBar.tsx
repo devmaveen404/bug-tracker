@@ -1,12 +1,15 @@
 "use client";
 
-import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
+import { Avatar, Box, Button, Container, DropdownMenu, Flex, IconButton, Text } from '@radix-ui/themes';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { Skeleton } from '@/app/components';
 import SearchBar from './SearchBar';
+import { MdLogin } from "react-icons/md";
+import { GoIssueTracks } from "react-icons/go";
+import { HiOutlineHome } from "react-icons/hi";
 
 
 const NavBar = () => {
@@ -55,14 +58,23 @@ const NavLinks = () => {
     const currentPath = usePathname();
 
     const links = [
-        { label: 'Dashboard', href: '/' },
-        { label: 'Issues', href: '/issues/issueList' }
+        { label: 'Dashboard', href: '/', logo: <HiOutlineHome color='white' size={'22px'} /> },
+        { label: 'Issues', href: '/issues/issueList', logo: <GoIssueTracks color='white' size={'22px'} /> }
     ]
 
     return (
-        <ul className='flex flex-row space-x-3'>
+        <ul className='flex flex-row space-x-1 md:space-x-3'>
             {links.map(link => <li key={link.href}>
-                <Link className={`${link.href == currentPath ? "!bg-[var(--accent-11)] text-white" : "text-white"} nav-links`} href={link.href}>{link.label}</Link></li>)}
+                <Box>
+                    <Link
+                        className={`${link.href == currentPath ? "!bg-[var(--accent-11)] text-white" : "text-white"} nav-links`}
+                        href={link.href}>
+                        <Box>{link.logo}</Box>
+                        <Text className='hidden sm:block ml-1'>{link.label}</Text>
+                    </Link>
+                </Box>
+
+            </li>)}
         </ul>
     )
 }
@@ -92,13 +104,18 @@ const AuthStatus = () => {
                             <Text size={'2'}>{session.user!.email}</Text>
                         </DropdownMenu.Label>
                         <DropdownMenu.Item>
-                            <button className='' onClick={() => signOut({ callbackUrl: '/auth/signout' })}> Log out</button>
+                            <IconButton className='' onClick={() => signOut({ callbackUrl: '/auth/signout' })}> Log out</IconButton>
                         </DropdownMenu.Item>
                     </DropdownMenu.Content>
                 </DropdownMenu.Root>
-            )
-            }
-            {!session && <Link className='text-white' href={'/api/auth/signin'}>Log in</Link>}
+            )}
+            {!session &&
+                <Flex justify={'center'} align={'center'} p={'1'}>
+                    <Link className='text-white' href={'/api/auth/signin'}>
+                        <IconButton color='gray' variant='soft'><MdLogin color='white' size={'22px'} />
+                        </IconButton>
+                    </Link>
+                </Flex>}
         </Box >
     )
 }

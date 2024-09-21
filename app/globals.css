@@ -23,6 +23,6 @@ body {
 /* create custom tailwind classes */
 @layer utilities {
   .nav-links {
-    @apply hover:bg-[var(--accent-11)] rounded-md py-0.5 px-2 md:px-4 transition-colors
+    @apply hover:bg-[var(--accent-11)] rounded-md px-2 py-2 transition-colors flex justify-center items-center text-[17px] 
   }
 }

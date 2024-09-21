@@ -19,7 +19,6 @@ const SearchBar = () => {
     const [results, setResults] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // To control the dropdown visibility
-    const [isTransitioning, setIsTransitioning] = useState(false); // dropdown transition
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -29,7 +28,7 @@ const SearchBar = () => {
             return;
         }
 
-        // displaying results
+        // displaying results as user types
         const delayDebounceFn = setTimeout(async () => {
             setLoading(true);
             const searchResults = await fetchSearchResults(query);
@@ -48,10 +47,6 @@ const SearchBar = () => {
     const handleClickOutside = (event: MouseEvent) => {
         if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
             setIsDropdownOpen(false); // Close dropdown when clicking outside
-            setTimeout(() => {
-                setIsDropdownOpen(false); // Close dropdown after transition
-                setIsTransitioning(false);
-            }, 300); // Same duration as CSS transition
         }
     };
 
@@ -80,12 +75,13 @@ const SearchBar = () => {
                         onChange={handleChange}
                         type="search"
                         id="default-search"
-                        className="grow ps-10 text-sm text-white border border-gray-800 rounded-lg bg-gray-800 transition duration-300 ease-in-out"
+                        className="grow ps-10 text-sm text-white border border-gray-800 rounded-md bg-gray-800 transition duration-300 ease-in-out shrink focus:outline-none focus:shadow-[0_0_0_2px_rgba(255,255,255,0.8)]"
                         placeholder="Search issues..." />
                 </div>
                 <div
-                    className={`absolute opacity-95 z-10 backdrop-blur-2xl top-12 w-full bg-gray-800 rounded-md text-gray-300 flex grow transition-all duration-300 ease-in-out overflow-hidden ${isDropdownOpen ? 'opacity-100 max-h-fit' : 'opacity-0 max-h-0 overflow-hidden'
-                        } ${isTransitioning && 'opacity-0 max-h-0'}`}
+                    className={`absolute opacity-95 z-10 backdrop-blur-2xl top-12 w-full bg-gray-800 rounded-md text-gray-300 flex grow transition-all duration-300 ease-in-out overflow-hidden ${isDropdownOpen ? 'opacity-100 max-h-64' : 'opacity-0 max-h-0'
+                        }`}
+                    style={{ transitionProperty: 'opacity, max-height', transitionDuration: '300ms', transitionTimingFunction: 'ease-in-out' }} // Ensure smooth transition
                 >
                     {loading ? (
                         <p className='text-sm p-4'>Loading...</p>

@@ -79,7 +79,7 @@ const AuthForm = () => {
                 </div>
                 <div className='flex justify-center items-baseline mt-2 col-span-2'>
                     <Tabs.Root
-                        className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] p-4 shadow lg:shadow-none rounded-md"
+                        className="flex flex-col w-[90%] sm:w-[60%] lg:w-[70%] p-4"
                         defaultValue="tab1"
                         onValueChange={(value) => setCurrentTab(value)}
                     >
@@ -125,7 +125,7 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register2('email')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
                                             ${errors2.email ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="email"
                                         placeholder='example@.com'
@@ -138,7 +138,7 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register2('password')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
                                             ${errors2.password ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="password"
                                         placeholder="*******"
@@ -169,7 +169,7 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('name')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
                                             ${errors.name ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="name"
                                         placeholder='e.g Maven'
@@ -185,7 +185,7 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('email')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
                                             ${errors.email ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="email"
                                         placeholder='example@.com'
@@ -201,7 +201,7 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('password')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
                                             ${errors.password ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="Password"
                                         placeholder='enter password'
@@ -217,7 +217,7 @@ const AuthForm = () => {
                                     </label>
                                     <input
                                         {...register('confirmPassword')}
-                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none
+                                        className={`grow rounded px-2.5 text-[15px] leading-none bg-gray-100 h-[35px] outline-none focus:outline-none
                                             ${errors.confirmPassword ? 'focus:shadow-[0_0_0_2px_rgba(200,0,0,1)]' : 'focus:shadow-[0_0_0_2px_rgba(0,0,0,0.5)]'}`}
                                         id="confirmPassword"
                                         placeholder='re-enter password'
